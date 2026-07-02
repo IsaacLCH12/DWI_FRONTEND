@@ -1,1 +1,56 @@
-<p>reservar-cita works!</p>
+<div class="contenedor-reserva">
+  <div class="header-reserva">
+    <h2>Reservar Nueva Cita</h2>
+    <div class="indicador-pasos">Paso {{pasoActual}} de 3</div>
+  </div>
+
+  <div class="tarjeta-paso" *ngIf="pasoActual === 1">
+    <h3>1. ¿Dónde y qué necesitas?</h3>
+    <div class="form-group">
+      <label>Sede de Atención</label>
+      <select [(ngModel)]="reserva.sedeId" class="form-control">
+        <option [ngValue]="null">Seleccione una sede...</option>
+        <option *ngFor="let sede of sedes" [value]="sede.id">{{sede.nombre}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Especialidad / Servicio</label>
+      <select [(ngModel)]="reserva.servicioId" class="form-control">
+        <option [ngValue]="null">Seleccione un servicio...</option>
+        <option *ngFor="let servicio of servicios" [value]="servicio.id">{{servicio.nombre}}</option>
+      </select>
+    </div>
+    <button class="btn-primario" (click)="siguientePaso()" [disabled]="!reserva.sedeId || !reserva.servicioId">Continuar</button>
+  </div>
+
+  <div class="tarjeta-paso" *ngIf="pasoActual === 2">
+    <h3>2. Elige a tu Especialista</h3>
+    <div class="grid-medicos">
+      <div class="card-medico" *ngFor="let medico of medicos"
+           [class.seleccionado]="reserva.medicoId === medico.id"
+           (click)="reserva.medicoId = medico.id">
+        <div class="avatar">👨‍⚕️</div>
+        <h4>Dr. {{medico.nombre}} {{medico.apellido}}</h4>
+      </div>
+    </div>
+    <div class="botones-accion">
+      <button class="btn-secundario" (click)="pasoActual = 1">Atrás</button>
+      <button class="btn-primario" (click)="siguientePaso()" [disabled]="!reserva.medicoId">Continuar</button>
+    </div>
+  </div>
+
+  <div class="tarjeta-paso" *ngIf="pasoActual === 3">
+    <h3>3. Selecciona la Hora</h3>
+    <div class="grid-horarios">
+      <button class="btn-horario" *ngFor="let hora of horarios"
+              [class.seleccionado]="reserva.horarioId === hora.id"
+              (click)="reserva.horarioId = hora.id">
+        {{hora.fecha}} - {{hora.horaInicio}}
+      </button>
+    </div>
+    <div class="botones-accion">
+      <button class="btn-secundario" (click)="pasoActual = 2">Atrás</button>
+      <button class="btn-exito" (click)="confirmarReserva()" [disabled]="!reserva.horarioId">Confirmar Cita</button>
+    </div>
+  </div>
+</div>
