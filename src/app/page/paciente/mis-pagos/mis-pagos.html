@@ -1,1 +1,179 @@
-<p>mis-pagos works!</p>
+<div class="pagos-container">
+
+    <div class="header">
+
+        <div class="header-decor"></div>
+
+        <div class="header-content">
+
+            <div class="header-text">
+
+                <span class="eyebrow">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M2 10H22" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Portal del paciente
+                </span>
+
+                <h1>Mis Pagos</h1>
+                <p>Consulta el estado de tus pagos y comprobantes.</p>
+
+            </div>
+
+            <div class="header-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M2 10H22" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="stats-dock">
+
+        <div class="stat-card pagado">
+
+            <div class="stat-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="stat-text">
+                <h3>Total pagado</h3>
+                <h2>S/. {{totalPagado}}</h2>
+            </div>
+
+        </div>
+
+        <div class="stat-card pendiente">
+
+            <div class="stat-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="stat-text">
+                <h3>Pendiente</h3>
+                <h2>S/. {{totalPendiente}}</h2>
+            </div>
+
+        </div>
+
+    </div>
+
+    @if(cargando){
+
+        <div class="mensaje">
+            <span class="spinner"></span>
+            <p>Cargando pagos...</p>
+        </div>
+
+    }
+
+    @if(!cargando && error){
+
+        <div class="error">
+
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="16.5" r="1" fill="currentColor"/>
+            </svg>
+
+            <div class="error-text">
+                <strong>No pudimos cargar tus pagos</strong>
+                <p>{{error}}</p>
+            </div>
+
+        </div>
+
+    }
+
+    @if(!cargando && !error && pagos.length>0){
+
+    <div class="tabla-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Fecha</th>
+                    <th>Método</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for(pago of pagos;track pago.id){
+
+                <tr>
+
+                    <td data-label="Fecha">{{pago.fechaPago | date:'dd/MM/yyyy'}}</td>
+
+                    <td data-label="Método">{{pago.metodoPago}}</td>
+
+                    <td data-label="Monto" class="monto">S/. {{pago.montoTotal}}</td>
+
+                    <td data-label="Estado">
+
+                        <span
+                        class="badge"
+
+                        [ngClass]="{
+
+                        'verde': pago.estado=='PAGADO',
+
+                        'rojo': pago.estado!='PAGADO'
+
+                        }">
+
+                        <span class="badge-dot"></span>
+                        {{pago.estado}}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    }
+
+    @if(!cargando && !error && pagos.length==0){
+
+    <div class="empty">
+
+        <div class="empty-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M3 10H21" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+        </div>
+
+        <h3>No existen pagos registrados</h3>
+        <p>Cuando realices un pago aparecerá aquí.</p>
+
+    </div>
+
+    }
+
+</div>
