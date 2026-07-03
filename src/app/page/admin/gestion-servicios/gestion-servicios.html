@@ -1,1 +1,31 @@
-<p>gestion-servicios works!</p>
+<div class="gestion-container">
+  <div class="gestion-header">
+    <div>
+      <h2>Catálogo de Servicios</h2>
+      <p>Especialidades y atenciones brindadas en la clínica.</p>
+    </div>
+    <button class="btn-nuevo">+ Nuevo Servicio</button>
+  </div>
+
+  <div class="tabla-contenedor">
+    <table class="tabla-admin">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre del Servicio</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let servicio of listaServicios">
+          <td>#{{ servicio.id }}</td>
+          <td class="font-bold">{{ servicio.nombre }}</td>
+          <td><span class="badge badge-activo">Disponible</span></td>
+        </tr>
+        <tr *ngIf="listaServicios.length === 0">
+          <td colspan="3" class="text-center">No hay servicios registrados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
