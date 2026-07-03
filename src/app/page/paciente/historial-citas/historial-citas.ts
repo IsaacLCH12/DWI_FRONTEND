@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CitaService } from '../../../../core/services/cita.service';
+import { CitaService } from '../../../core/services/cita.service';
 
 @Component({
   selector: 'app-historial-citas',
@@ -14,8 +14,8 @@ export class HistorialCitas implements OnInit {
   private citaService = inject(CitaService);
 
   ngOnInit() {
-    this.citaService.getAllCitas().subscribe(res => {
-      this.citasPasadas = res.filter(c => c.estado === 'ATENDIDO' || c.estado === 'CANCELADO');
+    this.citaService.getAllCitas().subscribe((res: any[]) => {
+      this.citasPasadas = res.filter((c: any) => c.estado === 'ATENDIDO' || c.estado === 'CANCELADO');
     });
   }
 }
