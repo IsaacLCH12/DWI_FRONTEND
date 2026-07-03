@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PagoService } from '../../../../core/services/pago.service';
+import { PagoService } from '../../../core/services/pago.service';
 
 @Component({
   selector: 'app-mis-pagos',
@@ -14,7 +14,7 @@ export class MisPagos implements OnInit {
   private pagoService = inject(PagoService);
 
   ngOnInit() {
-    this.pagoService.getPagos().subscribe(res => {
+    this.pagoService.getPagos().subscribe((res: any[]) => {
       this.pagos = res;
     });
   }
