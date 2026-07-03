@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PacienteService } from '../../../../core/services/paciente.service';
+import { PacienteService } from '../../../core/services/paciente.service';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -17,7 +17,7 @@ export class MiPerfil implements OnInit {
 
   ngOnInit() {
     if(this.usuarioId) {
-      this.pacienteService.getPaciente(this.usuarioId).subscribe(res => {
+      this.pacienteService.getPaciente(this.usuarioId).subscribe((res: any) => {
         this.pacienteData = res;
       });
     }
