@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MedicoService } from '../../../../core/services/medico.service';
+import { MedicoService } from '../../../core/services/medico.service';
 
 @Component({
   selector: 'app-gestion-medicos',
@@ -14,7 +14,7 @@ export class GestionMedicos implements OnInit {
   listaMedicos: any[] = [];
 
   ngOnInit() {
-    this.medicoService.getAllMedicos().subscribe(res => {
+    this.medicoService.getAllMedicos().subscribe((res: any[]) => {
       this.listaMedicos = res;
     });
   }
