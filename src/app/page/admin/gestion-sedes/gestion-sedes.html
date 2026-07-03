@@ -1,1 +1,31 @@
-<p>gestion-sedes works!</p>
+<div class="gestion-container">
+  <div class="gestion-header">
+    <div>
+      <h2>Gestión de Sedes</h2>
+      <p>Locales activos del Centro de Salud Poquian.</p>
+    </div>
+    <button class="btn-nuevo">+ Nueva Sede</button>
+  </div>
+
+  <div class="tabla-contenedor">
+    <table class="tabla-admin">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre de la Sede</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sede of listaSedes">
+          <td>#{{ sede.id }}</td>
+          <td class="font-bold">{{ sede.nombre }}</td>
+          <td><span class="badge badge-activo">Operativa</span></td>
+        </tr>
+        <tr *ngIf="listaSedes.length === 0">
+          <td colspan="3" class="text-center">No hay sedes registradas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
