@@ -1,1 +1,38 @@
-<p>dashboard-admin works!</p>
+<div class="admin-header">
+  <h2>Panel de Control General</h2>
+  <p>Resumen operativo del Centro de Salud Poquian</p>
+</div>
+
+<section class="stats-grid">
+  <div class="stat-card">
+    <div class="icon-wrapper bg-blue">👥</div>
+    <div class="stat-info">
+      <h3>Pacientes Registrados</h3>
+      <h2>{{ totalPacientes }}</h2>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="icon-wrapper bg-teal">👨‍⚕️</div>
+    <div class="stat-info">
+      <h3>Médicos Activos</h3>
+      <h2>{{ totalMedicos }}</h2>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="icon-wrapper bg-indigo">🏥</div>
+    <div class="stat-info">
+      <h3>Sedes Operativas</h3>
+      <h2>{{ totalSedes }}</h2>
+    </div>
+  </div>
+</section>
+
+<section class="acciones-rapidas">
+  <h3>Accesos Directos</h3>
+  <div class="botones-grid">
+    <button class="btn-accion" routerLink="/admin/medicos">Administrar Médicos</button>
+    <button class="btn-accion" routerLink="/admin/pacientes">Directorio de Pacientes</button>
+  </div>
+</section>
