@@ -1,1 +1,34 @@
-<p>dashboard-paciente works!</p>
+<div class="dashboard-wrapper">
+  <header class="dashboard-header">
+    <div class="saludo">
+      <!-- 💡 AQUÍ SE VUELVE DINÁMICO -->
+      <h2>Hola, {{ nombrePaciente }} 👋</h2>
+      <p>Bienvenido a tu portal de salud. ¿En qué podemos ayudarte hoy?</p>
+    </div>
+    <button class="btn-reservar" routerLink="/paciente/reservar">
+      + Nueva Cita
+    </button>
+  </header>
+  
+  <!-- El resto de las tarjetas se queda exactamente igual -->
+  <section class="tarjetas-grid">
+    <div class="card card-destacada">
+      <div class="card-icon">🩺</div>
+      <div class="card-info">
+        <h3>Tu Próxima Cita</h3>
+        <p class="fecha">Revisa tu agenda médica.</p>
+      </div>
+      <button class="btn-outline" routerLink="/paciente/mis-citas">Ver detalle</button>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📂</div>
+      <div class="card-info">
+        <h3>Historial Médico</h3>
+        <p>Revisa tus atenciones y recetas pasadas.</p>
+      </div>
+      <button class="btn-link" routerLink="/paciente/historial">Ver historial &rarr;</button>
+    </div>
+  </section>
+</div>
+
