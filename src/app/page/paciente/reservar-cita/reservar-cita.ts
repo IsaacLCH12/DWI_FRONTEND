@@ -1,9 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../../../environment/environment';
+// Importamos tus nuevos servicios específicos
+import { SedeService } from '../../../../core/services/sede.service';
+import { ServicioService } from '../../../../core/services/servicio.service';
+import { MedicoService } from '../../../../core/services/medico.service';
+import { HorarioService } from '../../../../core/services/horario.service';
+import { CitaService } from '../../../../core/services/cita.service';
 
 @Component({
   selector: 'app-reservar-cita',
@@ -13,9 +17,13 @@ import { environment } from '../../../../environment/environment';
   styleUrls: ['./reservar-cita.scss']
 })
 export class ReservarCita implements OnInit {
-  private http = inject(HttpClient);
+  // Inyectamos todos los servicios
+  private sedeService = inject(SedeService);
+  private servicioService = inject(ServicioService);
+  private medicoService = inject(MedicoService);
+  private horarioService = inject(HorarioService);
+  private citaService = inject(CitaService);
   private router = inject(Router);
-  private apiUrl = environment.apiUrl;
 
   pasoActual = 1;
   sedes: any[] = [];
@@ -23,7 +31,6 @@ export class ReservarCita implements OnInit {
   medicos: any[] = [];
   horarios: any[] = [];
 
-  // Datos seleccionados por el paciente
   reserva = {
     sedeId: null,
     servicioId: null,
@@ -37,8 +44,8 @@ export class ReservarCita implements OnInit {
   }
 
   cargarSedesYServicios() {
-    this.http.get<any[]>(`${this.apiUrl}/sedes/activas`).subscribe(res => this.sedes = res);
-    this.http.get<any[]>(`${this.apiUrl}/servicios/activos`).subscribe(res => this.servicios = res);
+    this.sedeService.getSedesActivas().subscribe(res => this.sedes = res);
+    this.servicioService.getServiciosActivos().subscribe(res => this.servicios = res);
   }
 
   siguientePaso() {
@@ -52,23 +59,23 @@ export class ReservarCita implements OnInit {
   }
 
   cargarMedicos() {
-    // Filtra médicos usando tu endpoint
-    this.http.get<any[]>(`${this.apiUrl}/medicos/filtrar?sedeId=${this.reserva.sedeId}&servicioId=${this.reserva.servicioId}`)
+    // Usamos el id de la sede y el id del servicio
+    this.medicoService.getMedicosPorFiltro(this.reserva.sedeId!, this.reserva.servicioId!)
       .subscribe(res => this.medicos = res);
   }
 
   cargarHorarios() {
-    this.http.get<any[]>(`${this.apiUrl}/horarios/medico/${this.reserva.medicoId}`)
+    this.horarioService.getHorariosMedico(this.reserva.medicoId!)
       .subscribe(res => this.horarios = res);
   }
 
   confirmarReserva() {
-    this.http.post(`${this.apiUrl}/citas`, this.reserva).subscribe({
+    this.citaService.crearCita(this.reserva).subscribe({
       next: () => {
         alert('¡Cita reservada con éxito!');
         this.router.navigate(['/paciente/mis-citas']);
       },
-      error: (err) => alert('Error al reservar la cita')
+      error: () => alert('Error al reservar la cita')
     });
   }
 }
