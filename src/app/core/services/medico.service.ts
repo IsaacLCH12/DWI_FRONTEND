@@ -10,4 +10,8 @@ export class MedicoService {
   getMedicosPorFiltro(sedeId: number, servicioId: number) {
     return this.http.get<any[]>(`${this.apiUrl}/medicos/filtrar?sedeId=${sedeId}&servicioId=${servicioId}`);
   }
+  getAllMedicos() {
+    return this.http.get<any[]>(`${this.apiUrl}/medicos`);
+  }
+
 }
