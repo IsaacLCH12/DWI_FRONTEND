@@ -1,0 +1,442 @@
+$primary:#1D4ED8;
+$primary-dark:#1743A6;
+$primary-soft:#EEF3FF;
+$secondary:#0D9488;
+$secondary-soft:#E6F8F6;
+$bg:#F6F8FC;
+$surface:#FFFFFF;
+$line:#E6EAF2;
+$text:#1E293B;
+$text-muted:#64748B;
+$text-subtle:#94A3B8;
+$success:#12A150;
+$success-soft:#E7F8EE;
+$danger:#E23636;
+$danger-soft:#FCEAEA;
+$warning:#DB8B0B;
+$warning-soft:#FDF2E0;
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+}
+
+.historial-container{
+    min-height:100vh;
+    background:$bg;
+    padding:48px 56px;
+    color:$text;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+
+@media (max-width:768px){
+    .historial-container{
+        padding:24px 16px;
+    }
+}
+
+// ---------- Cabecera ----------
+
+.header{
+    position:relative;
+    background:linear-gradient(135deg,$primary 0%,$primary-dark 100%);
+    border-radius:20px;
+    padding:34px 36px 46px;
+    overflow:hidden;
+    box-shadow:0 16px 32px rgba(29,78,216,.22);
+}
+
+.header-decor{
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    top:-90px;
+    right:-60px;
+}
+
+.header-content{
+    position:relative;
+    z-index:1;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,.16);
+    color:#fff;
+    padding:5px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+}
+
+.header h1{
+    font-size:30px;
+    font-weight:700;
+    margin:0;
+    color:#fff;
+    letter-spacing:-.02em;
+}
+
+.header p{
+    font-size:14.5px;
+    margin:8px 0 0;
+    color:rgba(255,255,255,.82);
+    max-width:420px;
+}
+
+.header-icon{
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    background:rgba(255,255,255,.14);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+@media (max-width:640px){
+    .header-icon{
+        display:none;
+    }
+}
+
+// ---------- Barra flotante de búsqueda ----------
+
+.search-dock{
+    position:relative;
+    z-index:2;
+    margin-top:-28px;
+    background:$surface;
+    border-radius:16px;
+    padding:16px 22px;
+    box-shadow:0 14px 28px rgba(15,23,42,.09);
+    border:1px solid $line;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+.search-wrapper{
+    position:relative;
+    flex:1;
+    min-width:220px;
+}
+
+.search-icon{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:$text-subtle;
+    pointer-events:none;
+}
+
+.busqueda{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1px solid $line;
+    background:$bg;
+    outline:none;
+    font-size:14px;
+    color:$text;
+    transition:all .15s ease;
+}
+
+.busqueda::placeholder{
+    color:$text-subtle;
+}
+
+.busqueda:focus{
+    border-color:$primary;
+    background:$surface;
+    box-shadow:0 0 0 3px rgba($primary,.12);
+}
+
+.resumen{
+    font-size:13px;
+    font-weight:600;
+    color:$text-muted;
+    white-space:nowrap;
+}
+
+// ---------- Tabla ----------
+
+.tabla-card{
+    margin-top:28px;
+    background:$surface;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 26px rgba(15,23,42,.07);
+    border:1px solid $line;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:$primary-soft;
+}
+
+th{
+    padding:14px 20px;
+    text-align:left;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:$primary-dark;
+    border-bottom:1px solid $line;
+}
+
+td{
+    padding:16px 20px;
+    border-bottom:1px solid $line;
+    color:$text;
+    font-size:14.5px;
+    vertical-align:middle;
+}
+
+tbody tr{
+    transition:background .15s ease;
+}
+
+tbody tr:last-child td{
+    border-bottom:none;
+}
+
+tbody tr:hover{
+    background:$primary-soft;
+}
+
+.fecha-dia{
+    display:block;
+    font-weight:600;
+    color:$text;
+}
+
+.fecha-hora{
+    display:block;
+    font-size:12.5px;
+    color:$text-muted;
+    margin-top:2px;
+}
+
+.servicio-cell{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.servicio-avatar{
+    width:32px;
+    height:32px;
+    border-radius:9px;
+    background:$secondary-soft;
+    color:darken($secondary,10%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:13px;
+    flex-shrink:0;
+    text-transform:uppercase;
+}
+
+// ---------- Badges ----------
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:6px 13px;
+    border-radius:999px;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.01em;
+}
+
+.badge-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+}
+
+.verde{
+    background:$success-soft;
+    color:darken($success,10%);
+}
+
+.verde .badge-dot{
+    background:$success;
+}
+
+.rojo{
+    background:$danger-soft;
+    color:darken($danger,8%);
+}
+
+.rojo .badge-dot{
+    background:$danger;
+}
+
+.amarillo{
+    background:$warning-soft;
+    color:darken($warning,8%);
+}
+
+.amarillo .badge-dot{
+    background:$warning;
+}
+
+// ---------- Estados: vacío / error / carga ----------
+
+.empty{
+    margin-top:28px;
+    text-align:center;
+    background:$surface;
+    border-radius:16px;
+    padding:64px 40px;
+    box-shadow:0 10px 26px rgba(15,23,42,.07);
+    border:1px solid $line;
+}
+
+.empty-icon{
+    width:64px;
+    height:64px;
+    border-radius:18px;
+    background:$primary-soft;
+    color:$primary;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 18px;
+}
+
+.empty h3{
+    color:$text;
+    font-size:18px;
+    margin:0 0 6px;
+}
+
+.empty p{
+    color:$text-muted;
+    font-size:14.5px;
+    margin:0;
+}
+
+.mensaje{
+    margin-top:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:$surface;
+    padding:28px;
+    border-radius:14px;
+    box-shadow:0 10px 26px rgba(15,23,42,.06);
+    border:1px solid $line;
+    color:$text-muted;
+    font-size:14.5px;
+}
+
+.spinner{
+    width:18px;
+    height:18px;
+    border:2.5px solid $primary-soft;
+    border-top-color:$primary;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+    to{ transform:rotate(360deg); }
+}
+
+.error{
+    margin-top:28px;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    background:$danger-soft;
+    color:darken($danger,15%);
+    padding:20px 22px;
+    border-radius:14px;
+    border:1px solid rgba($danger,.18);
+}
+
+.error svg{
+    flex-shrink:0;
+    margin-top:1px;
+}
+
+.error strong{
+    display:block;
+    font-size:14.5px;
+    margin-bottom:2px;
+}
+
+.error p{
+    margin:0;
+    font-size:13.5px;
+    opacity:.9;
+}
+
+// ---------- Responsive: tabla en tarjetas ----------
+
+@media (max-width:768px){
+
+    thead{
+        display:none;
+    }
+
+    table, tbody, tr, td{
+        display:block;
+        width:100%;
+    }
+
+    tbody tr{
+        padding:16px 18px;
+        border-bottom:1px solid $line;
+    }
+
+    td{
+        border-bottom:none;
+        padding:6px 0;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:12px;
+    }
+
+    td::before{
+        content:attr(data-label);
+        font-size:12px;
+        font-weight:600;
+        color:$text-subtle;
+        text-transform:uppercase;
+        letter-spacing:.03em;
+    }
+
+}
