@@ -1,1 +1,36 @@
-<p>gestion-medicos works!</p>
+<div class="gestion-container">
+  <div class="gestion-header">
+    <div>
+      <h2>Personal Médico</h2>
+      <p>Directorio de todos los doctores registrados.</p>
+    </div>
+    <button class="btn-nuevo">+ Registrar Médico</button>
+  </div>
+
+  <div class="tabla-contenedor">
+    <table class="tabla-admin">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre Completo</th>
+          <th>Especialidad</th>
+          <th>Sede Asignada</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let medico of listaMedicos">
+          <td>#{{ medico.id }}</td>
+          <td class="font-bold">Dr. {{ medico.nombre }} {{ medico.apellido }}</td>
+          <td>{{ medico.especialidadNombre || 'Medicina General' }}</td>
+          <td>{{ medico.sedeNombre || 'Principal' }}</td>
+          <td><span class="badge badge-activo">Activo</span></td>
+        </tr>
+        <tr *ngIf="listaMedicos.length === 0">
+          <td colspan="5" class="text-center">No hay médicos registrados aún.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
