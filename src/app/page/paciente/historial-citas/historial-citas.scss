@@ -38,7 +38,6 @@ body{
     }
 }
 
-// ---------- Cabecera ----------
 
 .header{
     position:relative;
@@ -117,7 +116,6 @@ body{
     }
 }
 
-// ---------- Barra flotante de búsqueda ----------
 
 .search-dock{
     position:relative;
@@ -179,7 +177,6 @@ body{
     white-space:nowrap;
 }
 
-// ---------- Tabla ----------
 
 .tabla-card{
     margin-top:28px;
@@ -310,7 +307,6 @@ tbody tr:hover{
     background:$warning;
 }
 
-// ---------- Estados: vacío / error / carga ----------
 
 .empty{
     margin-top:28px;
@@ -403,7 +399,6 @@ tbody tr:hover{
     opacity:.9;
 }
 
-// ---------- Responsive: tabla en tarjetas ----------
 
 @media (max-width:768px){
 

@@ -30,7 +30,6 @@ $danger-soft:#FCEAEA;
     }
 }
 
-// ---------- Cabecera ----------
 
 .header{
     position:relative;
@@ -109,7 +108,7 @@ $danger-soft:#FCEAEA;
     }
 }
 
-// ---------- Tarjetas flotantes de resumen ----------
+
 
 .stats-dock{
     position:relative;
@@ -270,7 +269,7 @@ tbody tr:hover{
     background:$danger;
 }
 
-// ---------- Estados: vacío / error / carga ----------
+
 
 .empty{
     margin-top:28px;
@@ -363,7 +362,6 @@ tbody tr:hover{
     opacity:.9;
 }
 
-// ---------- Responsive: tabla en tarjetas ----------
 
 @media (max-width:768px){
 
