@@ -14,4 +14,8 @@ export class PacienteService {
   actualizarPaciente(id: string, data: any) {
     return this.http.put(`${this.apiUrl}/pacientes/${id}`, data);
   }
+  getAllPacientes() {
+    return this.http.get<any[]>(`${this.apiUrl}/pacientes`);
+  }
+
 }
