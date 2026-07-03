@@ -1,16 +1,12 @@
 import { Routes } from '@angular/router';
-import { Login } from './page/auth/login/login';
-import { Registro } from './page/auth/registro/registro';
-import { DashboardAdmin } from './page/admin/dashboard-admin/dashboard-admin';
-import { GestionMedicos } from './page/admin/gestion-medicos/gestion-medicos';
-import { DashboardPaciente } from './page/paciente/dashboard-paciente/dashboard-paciente';
+import { DashboardAdmin } from './dashboard-admin/dashboard-admin';
+import { GestionMedicos } from './gestion-medicos/gestion-medicos';
+import { GestionSedes } from './gestion-sedes/gestion-sedes';
+import { GestionServicios } from './gestion-servicios/gestion-servicios';
 
-export const routes: Routes = [
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
-  { path: 'auth/login', component: Login },
-  { path: 'auth/registro', component: Registro },
-  { path: 'admin', component: DashboardAdmin },
-  { path: 'admin/medicos', component: GestionMedicos },
-  { path: 'paciente', component: DashboardPaciente },
-  { path: '**', redirectTo: 'auth/login' }
+export const adminRoutes: Routes = [
+  { path: '', component: DashboardAdmin },
+  { path: 'medicos', component: GestionMedicos },
+  { path: 'sedes', component: GestionSedes },
+  { path: 'servicios', component: GestionServicios }
 ];
