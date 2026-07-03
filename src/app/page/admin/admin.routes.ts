@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { DashboardAdmin } from './dashboard-admin/dashboard-admin';
 import { GestionMedicos } from './gestion-medicos/gestion-medicos';
-import { GestionPacientes } from './gestion-pacientes/gestion-pacientes';
+import { GestionSedes } from './gestion-sedes/gestion-sedes';
+import { GestionServicios } from './gestion-servicios/gestion-servicios';
 
 export const adminRoutes: Routes = [
   { path: '', component: DashboardAdmin },
   { path: 'medicos', component: GestionMedicos },
-  { path: 'pacientes', component: GestionPacientes }
+  { path: 'sedes', component: GestionSedes },
+  { path: 'servicios', component: GestionServicios }
 ];
