@@ -5,7 +5,7 @@
       <div><h2>Personal Médico</h2><p>Directorio de doctores del Centro</p></div>
       <button class="btn-primary" (click)="abrirCrear()">+ Nuevo Médico</button>
     </div>
-    
+
     <div class="table-container">
       <table>
         <thead>
@@ -67,7 +67,7 @@
           <input type="text" formControlName="apellido" placeholder="Ej. Romero">
         </div>
       </div>
-      
+
       <!-- Campos de cuenta de usuario (solo al crear) -->
       <div class="form-group row-group" *ngIf="!modoEdicion">
         <div style="flex:1">
@@ -79,12 +79,12 @@
           <input type="email" formControlName="correo" placeholder="Ej. medico@clinic.com">
         </div>
       </div>
-      
+
       <div class="form-group full-width" *ngIf="!modoEdicion">
         <label>Contraseña de Acceso</label>
         <input type="password" formControlName="password" placeholder="••••••••">
       </div>
-      
+
       <div class="form-group row-group">
         <div style="flex:1">
           <label>Sede Asignada</label>
@@ -106,7 +106,7 @@
         <label>URL Foto (Opcional)</label>
         <input type="text" formControlName="fotoUrl" placeholder="https://...">
       </div>
-      
+
       <div class="form-actions full-width">
         <button type="button" class="btn-cancel" (click)="mostrarModalForm = false">Cancelar</button>
         <button type="submit" class="btn-submit" [disabled]="medicoForm.invalid || guardando">
@@ -117,7 +117,7 @@
   </div>
 </div>
 
-<app-modal-confirmacion 
+<app-modal-confirmacion
   [visible]="mostrarModalConfirm"
   [titulo]="(medicoSeleccionado?.estado !== false ? 'Deshabilitar' : 'Habilitar') + ' Médico'"
   [mensaje]="'¿Seguro que deseas ' + (medicoSeleccionado?.estado !== false ? 'deshabilitar' : 'habilitar') + ' al Dr. ' + (medicoSeleccionado?.nombre || '') + '?'"

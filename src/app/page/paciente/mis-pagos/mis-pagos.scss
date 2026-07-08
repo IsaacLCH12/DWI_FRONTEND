@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .paciente-page {
   padding: 2rem 5%;
   background: #f8fafc;
@@ -89,3 +90,405 @@
     border-bottom: 1px solid #e2e8f0;
   }
 }
+=======
+$primary:#1D4ED8;
+$primary-dark:#1743A6;
+$primary-soft:#EEF3FF;
+$bg:#F6F8FC;
+$surface:#FFFFFF;
+$line:#E6EAF2;
+$text:#1E293B;
+$text-muted:#64748B;
+$text-subtle:#94A3B8;
+$success:#12A150;
+$success-soft:#E7F8EE;
+$danger:#E23636;
+$danger-soft:#FCEAEA;
+
+*{
+    box-sizing:border-box;
+}
+
+.pagos-container{
+    min-height:100vh;
+    background:$bg;
+    padding:48px 56px;
+    color:$text;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+
+@media (max-width:768px){
+    .pagos-container{
+        padding:24px 16px;
+    }
+}
+
+
+.header{
+    position:relative;
+    background:linear-gradient(135deg,$primary 0%,$primary-dark 100%);
+    border-radius:20px;
+    padding:34px 36px 46px;
+    overflow:hidden;
+    box-shadow:0 16px 32px rgba(29,78,216,.22);
+}
+
+.header-decor{
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    top:-90px;
+    right:-60px;
+}
+
+.header-content{
+    position:relative;
+    z-index:1;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,.16);
+    color:#fff;
+    padding:5px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+}
+
+.header h1{
+    font-size:30px;
+    font-weight:700;
+    margin:0;
+    color:#fff;
+    letter-spacing:-.02em;
+}
+
+.header p{
+    font-size:14.5px;
+    margin:8px 0 0;
+    color:rgba(255,255,255,.82);
+    max-width:420px;
+}
+
+.header-icon{
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    background:rgba(255,255,255,.14);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+@media (max-width:640px){
+    .header-icon{
+        display:none;
+    }
+}
+
+
+
+.stats-dock{
+    position:relative;
+    z-index:2;
+    margin-top:-32px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.stat-card{
+    flex:1;
+    min-width:240px;
+    background:$surface;
+    border-radius:16px;
+    padding:22px 24px;
+    box-shadow:0 14px 28px rgba(15,23,42,.09);
+    border:1px solid $line;
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.stat-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.stat-card.pagado .stat-icon{
+    background:$success-soft;
+    color:darken($success,8%);
+}
+
+.stat-card.pendiente .stat-icon{
+    background:$danger-soft;
+    color:darken($danger,4%);
+}
+
+.stat-text h3{
+    margin:0;
+    font-size:12.5px;
+    font-weight:600;
+    color:$text-muted;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+}
+
+.stat-text h2{
+    margin:4px 0 0;
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:-.01em;
+    color:$text;
+}
+
+.stat-card.pagado h2{
+    color:darken($success,12%);
+}
+
+.stat-card.pendiente h2{
+    color:darken($danger,10%);
+}
+
+// ---------- Tabla ----------
+
+.tabla-card{
+    margin-top:28px;
+    background:$surface;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 26px rgba(15,23,42,.07);
+    border:1px solid $line;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:$primary-soft;
+}
+
+th{
+    padding:14px 20px;
+    text-align:left;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:$primary-dark;
+    border-bottom:1px solid $line;
+}
+
+td{
+    padding:16px 20px;
+    border-bottom:1px solid $line;
+    color:$text;
+    font-size:14.5px;
+    vertical-align:middle;
+}
+
+.monto{
+    font-weight:700;
+}
+
+tbody tr{
+    transition:background .15s ease;
+}
+
+tbody tr:last-child td{
+    border-bottom:none;
+}
+
+tbody tr:hover{
+    background:$primary-soft;
+}
+
+// ---------- Badges ----------
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:6px 13px;
+    border-radius:999px;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.01em;
+}
+
+.badge-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+}
+
+.verde{
+    background:$success-soft;
+    color:darken($success,10%);
+}
+
+.verde .badge-dot{
+    background:$success;
+}
+
+.rojo{
+    background:$danger-soft;
+    color:darken($danger,8%);
+}
+
+.rojo .badge-dot{
+    background:$danger;
+}
+
+
+
+.empty{
+    margin-top:28px;
+    text-align:center;
+    background:$surface;
+    border-radius:16px;
+    padding:64px 40px;
+    box-shadow:0 10px 26px rgba(15,23,42,.07);
+    border:1px solid $line;
+}
+
+.empty-icon{
+    width:64px;
+    height:64px;
+    border-radius:18px;
+    background:$primary-soft;
+    color:$primary;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 18px;
+}
+
+.empty h3{
+    color:$text;
+    font-size:18px;
+    margin:0 0 6px;
+}
+
+.empty p{
+    color:$text-muted;
+    font-size:14.5px;
+    margin:0;
+}
+
+.mensaje{
+    margin-top:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:$surface;
+    padding:28px;
+    border-radius:14px;
+    box-shadow:0 10px 26px rgba(15,23,42,.06);
+    border:1px solid $line;
+    color:$text-muted;
+    font-size:14.5px;
+}
+
+.spinner{
+    width:18px;
+    height:18px;
+    border:2.5px solid $primary-soft;
+    border-top-color:$primary;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+    to{ transform:rotate(360deg); }
+}
+
+.error{
+    margin-top:28px;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    background:$danger-soft;
+    color:darken($danger,15%);
+    padding:20px 22px;
+    border-radius:14px;
+    border:1px solid rgba($danger,.18);
+}
+
+.error svg{
+    flex-shrink:0;
+    margin-top:1px;
+}
+
+.error strong{
+    display:block;
+    font-size:14.5px;
+    margin-bottom:2px;
+}
+
+.error p{
+    margin:0;
+    font-size:13.5px;
+    opacity:.9;
+}
+
+
+@media (max-width:768px){
+
+    thead{
+        display:none;
+    }
+
+    table, tbody, tr, td{
+        display:block;
+        width:100%;
+    }
+
+    tbody tr{
+        padding:16px 18px;
+        border-bottom:1px solid $line;
+    }
+
+    td{
+        border-bottom:none;
+        padding:6px 0;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:12px;
+    }
+
+    td::before{
+        content:attr(data-label);
+        font-size:12px;
+        font-weight:600;
+        color:$text-subtle;
+        text-transform:uppercase;
+        letter-spacing:.03em;
+    }
+
+}
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b

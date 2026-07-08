@@ -18,6 +18,7 @@ export class Login {
 
   loginForm: FormGroup = this.fb.group({
     identificador: ['', Validators.required],
+<<<<<<< HEAD
     password: ['', Validators.required]
   });
 
@@ -31,10 +32,20 @@ export class Login {
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
           this.cargando = false;
+=======
+    password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (res) => {
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
           if (res.rol === 'ADMIN') {
             this.router.navigate(['/admin']);
           } else if (res.rol === 'PACIENTE') {
             this.router.navigate(['/paciente']);
+<<<<<<< HEAD
           } else if (res.rol === 'MEDICO') {
             this.mensajeError = 'El portal para médicos aún no está disponible.';
             this.authService.logout(); // Cerramos la sesión porque no hay página a donde ir
@@ -53,6 +64,11 @@ export class Login {
             this.mensajeError = 'Ocurrió un error inesperado. Intenta de nuevo.';
           }
         }
+=======
+          }
+        },
+        error: () => alert('Credenciales incorrectas. Verifica tu DNI/Correo y contraseña.')
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
       });
     }
   }

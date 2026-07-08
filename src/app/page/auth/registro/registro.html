@@ -1,4 +1,5 @@
 <div class="auth-container">
+<<<<<<< HEAD
   <div class="auth-card form-registro">
     <div class="auth-header">
       <h2>Nuevo Paciente</h2>
@@ -66,10 +67,47 @@
         <small class="error-msg" *ngIf="registroForm.get('correo')?.hasError('email') && registroForm.get('correo')?.touched && !registroForm.get('correo')?.hasError('required')">
           Ingresa un correo válido (ej. usuario@dominio.com).
         </small>
+=======
+  <div class="auth-card registro-card">
+    <div class="brand">
+      <h2>🏥 Únete a Salud Poquian</h2>
+      <p>Crea tu cuenta de paciente para reservar citas</p>
+    </div>
+
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+      <div class="grid-formularios">
+        
+        <div class="form-group">
+          <label>Nombres</label>
+          <input type="text" formControlName="nombre" class="form-control" placeholder="Ej: Jorge">
+        </div>
+        
+        <div class="form-group">
+          <label>Apellidos</label>
+          <input type="text" formControlName="apellido" class="form-control" placeholder="Ej: Pérez">
+        </div>
+
+        <div class="form-group">
+          <label>DNI (8 dígitos)</label>
+          <input type="text" formControlName="dni" class="form-control" placeholder="77778888">
+        </div>
+
+        <div class="form-group">
+          <label>Teléfono (9 dígitos)</label>
+          <input type="text" formControlName="telefono" class="form-control" placeholder="999888777">
+        </div>
+
+      </div> <!-- Cierre del grid -->
+
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" formControlName="correo" class="form-control" placeholder="jorge@email.com">
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
       </div>
 
       <div class="form-group">
         <label>Contraseña</label>
+<<<<<<< HEAD
         <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres"
                [class.input-error]="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
         <small class="error-msg" *ngIf="registroForm.get('password')?.hasError('required') && registroForm.get('password')?.touched">
@@ -90,5 +128,14 @@
     </form>
 
     <p class="auth-footer">¿Ya tienes cuenta? <a routerLink="/auth/login">Ingresa aquí</a></p>
+=======
+        <input type="password" formControlName="password" class="form-control" placeholder="Mínimo 6 caracteres">
+      </div>
+
+      <button type="submit" class="btn-ingresar" [disabled]="registroForm.invalid">Crear mi Cuenta</button>
+    </form>
+    
+    <p class="enlace-registro">¿Ya tienes cuenta? <a routerLink="/auth/login">Inicia sesión aquí</a></p>
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
   </div>
 </div>

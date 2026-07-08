@@ -21,12 +21,12 @@ export class GestionMedicos implements OnInit {
   private servicioService = inject(ServicioService);
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
-  
+
   listaMedicos: any[] = [];
   sedesActivas: any[] = [];
   serviciosActivos: any[] = [];
   cargando = true;
-  
+
   mostrarModalForm = false;
   mostrarModalConfirm = false;
   medicoSeleccionado: any = null;
@@ -76,7 +76,7 @@ export class GestionMedicos implements OnInit {
   abrirEditar(medico: any) {
     this.modoEdicion = true;
     this.medicoSeleccionado = medico;
-    
+
     // El response de getAllMedicos de backend tiene 'nombreSede' y 'nombreServicio'
     // Para rellenar el formulario de edición idealmente tendríamos el sedeId y servicioId crudos en la respuesta.
     // Asumiremos que el backend devuelve sedeId y servicioId en la entidad original si no, dejamos selects en blanco
@@ -110,12 +110,12 @@ export class GestionMedicos implements OnInit {
   guardar() {
     if (this.medicoForm.invalid) return;
     this.guardando = true;
-    
+
     const reqData = this.medicoForm.value;
     reqData.sedeId = Number(reqData.sedeId);
     reqData.servicioId = Number(reqData.servicioId);
     if (reqData.usuarioId === null || reqData.usuarioId === 0) {
-      delete reqData.usuarioId; 
+      delete reqData.usuarioId;
     }
     // Remove empty user fields if editing
     if (this.modoEdicion || (!reqData.dni && !reqData.correo)) {
@@ -124,7 +124,7 @@ export class GestionMedicos implements OnInit {
       delete reqData.password;
     }
 
-    const obs = this.modoEdicion 
+    const obs = this.modoEdicion
       ? this.medicoService.actualizarMedico(this.medicoSeleccionado.id, reqData)
       : this.medicoService.crearMedico(reqData);
 

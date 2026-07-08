@@ -17,6 +17,7 @@ export class Registro {
   private router = inject(Router);
 
   registroForm: FormGroup = this.fb.group({
+<<<<<<< HEAD
     dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern(/^\d{8}$/)]],
     nombre: ['', [Validators.required, Validators.minLength(2)]],
     apellido: ['', [Validators.required, Validators.minLength(2)]],
@@ -49,6 +50,34 @@ export class Registro {
           }
         }
       });
+=======
+    dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
+    nombre: ['', Validators.required],
+    apellido: ['', Validators.required],
+    correo: ['', [Validators.required, Validators.email]],
+    telefono: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+
+  onSubmit() {
+    if (this.registroForm.valid) {
+      this.authService.registro(this.registroForm.value).subscribe({
+        next: (res) => {
+          alert('¡Cuenta creada con éxito! Serás redirigido a tu panel de salud.');
+          // Como tu backend devuelve el token directo al registrar, podemos loguearlo automáticamente
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('rol', res.rol);
+          localStorage.setItem('usuarioId', res.usuarioId.toString());
+          
+          this.router.navigate(['/paciente']);
+        },
+        error: (err) => {
+          alert('Error al registrar. Es posible que el DNI ya esté en uso.');
+        }
+      });
+    } else {
+      alert('Por favor, completa todos los campos correctamente.');
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
     }
   }
 }

@@ -1,5 +1,6 @@
 <div class="auth-container">
   <div class="auth-card">
+<<<<<<< HEAD
     <div class="auth-header">
       <h2>Centro de Salud Poquian</h2>
       <p>Ingresa a tu portal de salud</p>
@@ -34,5 +35,27 @@
     </form>
 
     <p class="auth-footer">¿No tienes cuenta? <a routerLink="/auth/registro">Regístrate aquí</a></p>
+=======
+    <div class="brand">
+      <h2>🏥 Centro de Salud Poquian</h2>
+      <p>Ingresa a tu portal de salud</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>DNI o Correo Electrónico</label>
+        <input type="text" formControlName="identificador" class="form-control" placeholder="Ej: 77778888 o admin@clinica.com">
+      </div>
+      
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" class="form-control" placeholder="******">
+      </div>
+
+      <button type="submit" class="btn-ingresar" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+    </form>
+    
+    <p class="enlace-registro">¿Eres un paciente nuevo? <a routerLink="/auth/registro">Regístrate aquí</a></p>
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
   </div>
 </div>

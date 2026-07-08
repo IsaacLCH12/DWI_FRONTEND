@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Navbar } from '../../../shared/components/navbar/navbar';
@@ -7,16 +8,25 @@ import { ServicioService } from '../../../core/services/servicio.service';
 import { MedicoService } from '../../../core/services/medico.service';
 import { SedeService } from '../../../core/services/sede.service';
 import { AuthService } from '../../../core/services/auth.service';
+=======
+import { RouterLink } from '@angular/router';
+import { PacienteService } from '../../../../core/services/paciente.service';
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
 
 @Component({
   selector: 'app-dashboard-paciente',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, RouterLink, Navbar],
+=======
+  imports: [RouterLink],
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
   templateUrl: './dashboard-paciente.html',
   styleUrls: ['./dashboard-paciente.scss']
 })
 export class DashboardPaciente implements OnInit {
   private pacienteService = inject(PacienteService);
+<<<<<<< HEAD
   private servicioService = inject(ServicioService);
   private medicoService = inject(MedicoService);
   private sedeService = inject(SedeService);
@@ -67,5 +77,16 @@ export class DashboardPaciente implements OnInit {
       next: (res: any[]) => this.sedes = res,
       error: () => this.sedes = []
     });
+=======
+  nombrePaciente = 'Cargando...'; // Texto por defecto mientras consulta a la BD
+
+  ngOnInit() {
+    const id = localStorage.getItem('usuarioId');
+    if (id) {
+      this.pacienteService.getPaciente(id).subscribe(res => {
+        this.nombrePaciente = res.nombre; // Aquí atrapamos el nombre real
+      });
+    }
+>>>>>>> c99f0f454faa7a2b67af88f1870e37e9121a8d4b
   }
 }

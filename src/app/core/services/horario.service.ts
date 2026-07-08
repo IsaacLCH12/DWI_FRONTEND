@@ -5,7 +5,9 @@ import { environment } from '../../../environment/environment';
 @Injectable({ providedIn: 'root' })
 export class HorarioService {
   private http = inject(HttpClient);
+  private apiUrl = environment.apiUrl;
+
   getHorariosMedico(medicoId: number) {
-    return this.http.get<any[]>(`${environment.apiUrl}/horarios/medico/${medicoId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/horarios/medico/${medicoId}`);
   }
 }
