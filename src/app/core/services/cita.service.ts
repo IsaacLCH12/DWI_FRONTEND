@@ -5,17 +5,17 @@ import { environment } from '../../../environment/environment';
 @Injectable({ providedIn: 'root' })
 export class CitaService {
   private http = inject(HttpClient);
-  private apiUrl = environment.apiUrl;
+  private url = `${environment.apiUrl}/citas`;
 
   getAllCitas() {
-    return this.http.get<any[]>(`${this.apiUrl}/citas`);
+    return this.http.get<any[]>(this.url);
   }
 
-  crearCita(reserva: any) {
-    return this.http.post(`${this.apiUrl}/citas`, reserva);
+  crearCita(data: any) {
+    return this.http.post(this.url, data);
   }
 
-  cancelarCita(citaId: number) {
-    return this.http.put(`${this.apiUrl}/citas/${citaId}/cancelar`, {});
+  cancelarCita(id: number) {
+    return this.http.put(`${this.url}/${id}/cancelar`, {});
   }
 }
