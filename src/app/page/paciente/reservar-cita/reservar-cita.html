@@ -1,1 +1,45 @@
-<p>reservar-cita works!</p>
+<app-navbar></app-navbar>
+<div class="paciente-container">
+  <div class="reserva-card">
+    <h2>Agendar Nueva Cita</h2>
+
+    <div *ngIf="paso === 1" class="form-step">
+      <label>1. Selecciona la Sede</label>
+      <select [(ngModel)]="reserva.sedeId" class="form-control">
+        <option [value]="null" disabled>Elige una sede...</option>
+        <option *ngFor="let s of sedes" [value]="s.id">{{ s.nombre }}</option>
+      </select>
+
+      <label>2. Selecciona la Especialidad</label>
+      <select [(ngModel)]="reserva.servicioId" class="form-control">
+        <option [value]="null" disabled>Elige una especialidad...</option>
+        <option *ngFor="let s of servicios" [value]="s.id">{{ s.nombre }}</option>
+      </select>
+      <button (click)="avanzar()" [disabled]="!reserva.sedeId || !reserva.servicioId" class="btn-blue">Siguiente Paso</button>
+    </div>
+
+    <div *ngIf="paso === 2" class="form-step">
+      <label>3. Selecciona tu Médico</label>
+      <select [(ngModel)]="reserva.medicoId" class="form-control">
+        <option [value]="null" disabled>Elige un especialista...</option>
+        <option *ngFor="let m of medicos" [value]="m.id">Dr. {{ m.nombre }} {{ m.apellido }}</option>
+      </select>
+      <div class="btn-group">
+        <button (click)="retroceder()" class="btn-outline">Volver</button>
+        <button (click)="avanzar()" [disabled]="!reserva.medicoId" class="btn-blue">Ver Horarios</button>
+      </div>
+    </div>
+
+    <div *ngIf="paso === 3" class="form-step">
+      <label>4. Elige un Horario Disponible</label>
+      <select [(ngModel)]="reserva.horarioId" class="form-control">
+        <option [value]="null" disabled>Elige una hora...</option>
+        <option *ngFor="let h of horarios" [value]="h.id">{{ h.fecha }} - {{ h.horaInicio }}</option>
+      </select>
+      <div class="btn-group">
+        <button (click)="retroceder()" class="btn-outline">Volver</button>
+        <button (click)="confirmar()" [disabled]="!reserva.horarioId" class="btn-green">Confirmar Reserva</button>
+      </div>
+    </div>
+  </div>
+</div>

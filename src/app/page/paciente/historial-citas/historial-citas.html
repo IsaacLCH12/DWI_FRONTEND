@@ -1,1 +1,14 @@
-<p>historial-citas works!</p>
+<app-navbar></app-navbar>
+<div class="paciente-page">
+  <h2>Historial Clínico</h2>
+  <div class="grid-citas">
+    <div class="cita-card" *ngFor="let c of citasPasadas">
+      <div class="cita-header">
+        <h3>{{ c.servicioNombre }}</h3>
+        <span [class]="c.estado === 'ATENDIDO' ? 'badge-green' : 'badge-red'">{{ c.estado }}</span>
+      </div>
+      <p><strong>Dr(a).</strong> {{ c.medicoNombre }}</p>
+      <p><strong>Fecha:</strong> {{ c.fecha }}</p>
+    </div>
+  </div>
+</div>

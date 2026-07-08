@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:host {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  background: #f8fafc;
+}
+
+/* ========== HERO / BOTONES RÁPIDOS ========== */
+.welcome-section {
+  background: linear-gradient(135deg, #0f4c81 0%, #1a7fa3 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+
+  .welcome-content {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      .highlight { color: #7dd3fc; }
+    }
+    p { font-size: 1.1rem; opacity: 0.9; }
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .action-card {
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: left;
+    color: #1e293b;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 0.85rem;
+      color: #475569;
+      line-height: 1.4;
+    }
+  }
+}
+
+/* ========== COMÚN SECCIONES ========== */
+.section-especialidades, .section-medicos, .section-certificaciones {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  .subtitle {
+    color: #dc2626; /* Rojo para Staff Médico/Servicios */
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .desc {
+    color: #64748b;
+    font-size: 1.05rem;
+  }
+}
+
+/* ========== ESPECIALIDADES ========== */
+.grid-especialidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.especialidad-card {
+  text-align: center;
+  transition: transform 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+    .icon-wrapper { background: #555; }
+  }
+
+  .icon-wrapper {
+    background: #777;
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    border-bottom-right-radius: 40px; /* Estilo de la imagen de referencia */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: background 0.3s;
+
+    img {
+      width: 60px;
+      height: 60px;
+      filter: invert(1); /* Poner icono blanco */
+    }
+  }
+
+  p {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #333;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* ========== STAFF MEDICO ========== */
+.section-medicos {
+  background: white;
+  max-width: 100%;
+  padding: 5rem 0;
+
+  .section-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    text-align: left;
+    padding: 0 2rem;
+  }
+}
+
+.grid-medicos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.medico-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    object-position: top;
+    background: #e2e8f0;
+  }
+
+  .medico-info {
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .especialidad {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+/* ========== CERTIFICACIONES Y PAGOS ========== */
+.section-certificaciones {
+  border-top: 1px solid #e2e8f0;
+  padding: 4rem 2rem;
+}
+
+.cert-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.iso-box {
+  flex: 1;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  .iso-logo {
+    width: 120px;
+    object-fit: contain;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.6;
+    max-width: 500px;
+  }
+}
+
+.pagos-box {
+  flex: 1;
+  text-align: left;
+  @media (min-width: 768px) {
+    text-align: right;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .logos-pagos {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    @media (min-width: 768px) {
+      justify-content: flex-end;
+    }
+
+    img {
+      height: 35px;
+      object-fit: contain;
+    }
+  }
+}
+
+/* ========== FOOTER MODERNO ========== */
+.paciente-footer {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 5rem 0 0;
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+  }
+
+  .footer-col {
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: #dc2626; /* Línea roja de las imágenes */
+      }
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #a3a3a3;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li { margin-bottom: 0.75rem; }
+
+      a {
+        color: #a3a3a3;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s;
+        
+        &::before {
+          content: '• ';
+          color: #dc2626;
+        }
+
+        &:hover { color: #fff; }
+      }
+    }
+  }
+
+  .footer-bottom {
+    background: #111;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    p {
+      font-size: 0.85rem;
+      color: #737373;
+    }
+  }
+}
+
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+}

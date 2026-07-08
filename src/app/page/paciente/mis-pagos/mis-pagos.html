@@ -1,1 +1,17 @@
-<p>mis-pagos works!</p>
+<app-navbar></app-navbar>
+<div class="paciente-page">
+  <h2>Estado de Cuenta y Pagos</h2>
+  <div class="table-container">
+    <table class="paciente-table">
+      <thead><tr><th>ID Recibo</th><th>Monto</th><th>Fecha de Pago</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let p of pagos">
+          <td>#{{ p.id }}</td>
+          <td><strong>S/. {{ p.monto }}</strong></td>
+          <td>{{ p.fecha }}</td>
+          <td><span class="badge-green">Pagado</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

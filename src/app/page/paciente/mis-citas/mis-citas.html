@@ -1,1 +1,26 @@
-<p>mis-citas works!</p>
+<app-navbar></app-navbar>
+<div class="paciente-page">
+  <h2>Mis Citas Pendientes</h2>
+
+  <app-spinner-carga [visible]="cargando"></app-spinner-carga>
+
+  <div class="grid-citas" *ngIf="!cargando">
+    <div class="cita-card" *ngFor="let c of citas">
+      <div class="cita-header">
+        <h3>Especialidad: {{ c.servicioNombre }}</h3>
+        <span class="badge-blue">PENDIENTE</span>
+      </div>
+      <p><strong>Dr(a).</strong> {{ c.medicoNombre }}</p>
+      <p><strong>Sede:</strong> {{ c.sedeNombre }}</p>
+      <p><strong>Fecha y Hora:</strong> {{ c.fecha }} a las {{ c.hora }}</p>
+      <button class="btn-cancelar" (click)="abrirModal(c.id)">Anular Cita</button>
+    </div>
+    <div *ngIf="citas.length === 0" class="empty-state">No tiene citas hasta el momento.</div>
+  </div>
+</div>
+
+<app-modal-confirmacion
+  [visible]="mostrarModal"
+  (onCancelar)="cerrarModal()"
+  (onConfirmar)="cancelar()">
+</app-modal-confirmacion>

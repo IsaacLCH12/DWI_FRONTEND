@@ -1,1 +1,45 @@
-<p>dashboard-admin works!</p>
+<div class="admin-wrapper">
+  <app-sidebar></app-sidebar>
+  <main class="admin-content">
+    <div class="header-section">
+      <div>
+        <h2>Panel de Administración</h2>
+        <p>Centro de Salud Poquian — Resumen general del sistema</p>
+      </div>
+    </div>
+    
+    <div class="dashboard-grid">
+      <div class="dashboard-card card-medicos">
+        <div class="card-icon">👨‍⚕️</div>
+        <div class="card-info">
+          <h3>MÉDICOS TOTALES</h3>
+          <span class="card-number">{{ totalMedicos }}</span>
+        </div>
+      </div>
+      
+      <div class="dashboard-card card-sedes">
+        <div class="card-icon">🏥</div>
+        <div class="card-info">
+          <h3>SEDES ACTIVAS</h3>
+          <span class="card-number">{{ totalSedes }}</span>
+        </div>
+      </div>
+
+      <div class="dashboard-card card-servicios">
+        <div class="card-icon">🩺</div>
+        <div class="card-info">
+          <h3>SERVICIOS ACTIVOS</h3>
+          <span class="card-number">{{ totalServicios }}</span>
+        </div>
+      </div>
+
+      <div class="dashboard-card card-pacientes">
+        <div class="card-icon">🧑‍🤝‍🧑</div>
+        <div class="card-info">
+          <h3>PACIENTES REGISTRADOS</h3>
+          <span class="card-number">{{ totalPacientes }}</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

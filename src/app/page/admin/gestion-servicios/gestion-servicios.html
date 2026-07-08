@@ -1,1 +1,97 @@
-<p>gestion-servicios works!</p>
+<div class="admin-wrapper">
+  <app-sidebar></app-sidebar>
+  <main class="admin-content">
+    <div class="header-section">
+      <div><h2>Catálogo de Servicios</h2><p>Especialidades médicas registradas</p></div>
+      <button class="btn-primary" (click)="abrirCrear()">+ Nuevo Servicio</button>
+    </div>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Especialidad</th>
+            <th>Duración</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let serv of listaServicios">
+            <td>#{{ serv.id }}</td>
+            <td><strong>{{ serv.nombre }}</strong></td>
+            <td>{{ serv.duracionMin }} min</td>
+            <td>S/ {{ serv.precio }}</td>
+            <td>
+              <span class="badge" [class.inactivo]="!serv.estado">{{ serv.estado ? 'Activo' : 'Inactivo' }}</span>
+            </td>
+            <td>
+              <button class="btn-edit" (click)="abrirEditar(serv)">✏️</button>
+              <button class="btn-delete" (click)="abrirEliminar(serv)" [disabled]="!serv.estado">🚫</button>
+            </td>
+          </tr>
+          <tr *ngIf="listaServicios.length === 0 && !cargando">
+            <td colspan="6" style="text-align:center; padding: 2rem;">No hay registros.</td>
+          </tr>
+          <tr *ngIf="cargando">
+            <td colspan="6" style="text-align:center; padding: 2rem; color: #64748B;">
+              ⏳ Cargando datos desde el servidor... (puede tardar unos segundos)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Formulario -->
+<div class="modal-overlay" *ngIf="mostrarModalForm">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>{{ modoEdicion ? 'Editar Servicio' : 'Nuevo Servicio' }}</h3>
+      <button class="close-btn" (click)="mostrarModalForm = false">✕</button>
+    </div>
+    <form [formGroup]="servicioForm" (ngSubmit)="guardar()" class="form-grid">
+      <div class="form-group full-width">
+        <label>Nombre del Servicio</label>
+        <input type="text" formControlName="nombre" placeholder="Ej. Cardiología General">
+      </div>
+      <div class="form-group full-width">
+        <label>Descripción</label>
+        <textarea formControlName="descripcion" rows="3" placeholder="Detalles del servicio..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Precio (S/)</label>
+        <input type="number" formControlName="precio" min="0">
+      </div>
+      <div class="form-group">
+        <label>Duración (minutos)</label>
+        <input type="number" formControlName="duracionMin" min="1">
+      </div>
+      <div class="form-group checkbox-group full-width" *ngIf="modoEdicion">
+        <label>
+          <input type="checkbox" formControlName="estado">
+          Servicio Activo
+        </label>
+      </div>
+      
+      <div class="form-actions full-width">
+        <button type="button" class="btn-cancel" (click)="mostrarModalForm = false">Cancelar</button>
+        <button type="submit" class="btn-submit" [disabled]="servicioForm.invalid || guardando">
+          {{ guardando ? 'Guardando...' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-modal-confirmacion 
+  [visible]="mostrarModalConfirm"
+  titulo="Deshabilitar Servicio"
+  [mensaje]="'¿Seguro que deseas deshabilitar el servicio ' + (servicioSeleccionado?.nombre || '') + '?'"
+  textoConfirmar="Sí, deshabilitar"
+  (onConfirmar)="eliminar()"
+  (onCancelar)="mostrarModalConfirm = false">
+</app-modal-confirmacion>

@@ -1,1 +1,93 @@
-<p>gestion-sedes works!</p>
+<div class="admin-wrapper">
+  <app-sidebar></app-sidebar>
+  <main class="admin-content">
+    <div class="header-section">
+      <div><h2>Sedes Operativas</h2><p>Locales de atención disponibles</p></div>
+      <button class="btn-primary" (click)="abrirCrear()">+ Nueva Sede</button>
+    </div>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre de la Sede</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of listaSedes">
+            <td>#{{ s.id }}</td>
+            <td><strong>{{ s.nombre }}</strong></td>
+            <td>{{ s.direccion }}</td>
+            <td>{{ s.telefonoContacto }}</td>
+            <td>
+              <span class="badge" [class.inactivo]="!s.estado">{{ s.estado ? 'Activa' : 'Inactiva' }}</span>
+            </td>
+            <td>
+              <button class="btn-edit" (click)="abrirEditar(s)">✏️</button>
+              <button class="btn-delete" (click)="abrirEliminar(s)" [disabled]="!s.estado">🚫</button>
+            </td>
+          </tr>
+          <tr *ngIf="listaSedes.length === 0 && !cargando">
+            <td colspan="6" style="text-align:center; padding: 2rem;">No hay registros.</td>
+          </tr>
+          <tr *ngIf="cargando">
+            <td colspan="6" style="text-align:center; padding: 2rem; color: #64748B;">
+              ⏳ Cargando datos desde el servidor... (puede tardar unos segundos)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Formulario -->
+<div class="modal-overlay" *ngIf="mostrarModalForm">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>{{ modoEdicion ? 'Editar Sede' : 'Nueva Sede' }}</h3>
+      <button class="close-btn" (click)="mostrarModalForm = false">✕</button>
+    </div>
+    <form [formGroup]="sedeForm" (ngSubmit)="guardar()" class="form-grid">
+      <div class="form-group full-width">
+        <label>Nombre de la Sede</label>
+        <input type="text" formControlName="nombre" placeholder="Ej. Sede Surco">
+      </div>
+      <div class="form-group full-width">
+        <label>Dirección</label>
+        <input type="text" formControlName="direccion" placeholder="Ej. Av. Primavera 123">
+      </div>
+      <div class="form-group full-width">
+        <label>Teléfono de Contacto</label>
+        <input type="text" formControlName="telefonoContacto" placeholder="Ej. 013456789">
+      </div>
+      <div class="form-group checkbox-group full-width" *ngIf="modoEdicion">
+        <label>
+          <input type="checkbox" formControlName="estado">
+          Sede Activa
+        </label>
+      </div>
+      
+      <div class="form-actions full-width">
+        <button type="button" class="btn-cancel" (click)="mostrarModalForm = false">Cancelar</button>
+        <button type="submit" class="btn-submit" [disabled]="sedeForm.invalid || guardando">
+          {{ guardando ? 'Guardando...' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-modal-confirmacion 
+  [visible]="mostrarModalConfirm"
+  titulo="Deshabilitar Sede"
+  [mensaje]="'¿Seguro que deseas deshabilitar la sede ' + (sedeSeleccionada?.nombre || '') + '?'"
+  textoConfirmar="Sí, deshabilitar"
+  (onConfirmar)="eliminar()"
+  (onCancelar)="mostrarModalConfirm = false">
+</app-modal-confirmacion>

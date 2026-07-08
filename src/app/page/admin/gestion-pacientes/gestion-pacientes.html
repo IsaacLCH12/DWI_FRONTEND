@@ -1,0 +1,37 @@
+<div class="admin-wrapper">
+  <app-sidebar></app-sidebar>
+  <main class="admin-content">
+    <div class="header-section">
+      <div><h2>Pacientes Registrados</h2><p>Directorio de pacientes del sistema</p></div>
+    </div>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of listaPacientes">
+            <td>#{{ p.id }}</td>
+            <td><strong>{{ p.nombre }} {{ p.apellido }}</strong></td>
+            <td>{{ p.telefono || '-' }}</td>
+            <td>{{ p.correo || '-' }}</td>
+          </tr>
+          <tr *ngIf="listaPacientes.length === 0 && !cargando">
+            <td colspan="4" style="text-align:center; padding: 2rem;">No hay pacientes registrados.</td>
+          </tr>
+          <tr *ngIf="cargando">
+            <td colspan="4" style="text-align:center; padding: 2rem; color: #64748B;">
+              ⏳ Cargando datos desde el servidor...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

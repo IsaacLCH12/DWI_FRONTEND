@@ -1,1 +1,14 @@
-<p>navbar works!</p>
+<nav class="navbar">
+  <div class="nav-brand">
+    🏥 Centro de Salud Poquian
+  </div>
+  <div class="nav-links">
+    <a routerLink="/paciente" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+    <a routerLink="/paciente/reservar" routerLinkActive="active">Reservar Cita</a>
+    <a routerLink="/paciente/mis-citas" routerLinkActive="active">Mis Citas</a>
+    <a routerLink="/paciente/historial" routerLinkActive="active">Historial</a>
+    <a routerLink="/paciente/mis-pagos" routerLinkActive="active">Pagos</a>
+    <a routerLink="/paciente/mi-perfil" routerLinkActive="active">Mi Perfil</a>
+    <button class="btn-logout" (click)="cerrarSesion()">Salir</button>
+  </div>
+</nav>

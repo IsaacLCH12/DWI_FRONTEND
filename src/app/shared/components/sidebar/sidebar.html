@@ -1,1 +1,16 @@
-<p>sidebar works!</p>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2>⚙️ Panel Admin</h2>
+    <p>Centro de Salud Poquian</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">📊 Dashboard</a>
+    <a routerLink="/admin/medicos" routerLinkActive="active">👨‍⚕️ Médicos</a>
+    <a routerLink="/admin/sedes" routerLinkActive="active">🏥 Sedes</a>
+    <a routerLink="/admin/servicios" routerLinkActive="active">🩺 Servicios</a>
+    <a routerLink="/admin/pacientes" routerLinkActive="active">🧑‍🤝‍🧑 Pacientes</a>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="btn-logout" (click)="cerrarSesion()">Cerrar Sesión</button>
+  </div>
+</aside>

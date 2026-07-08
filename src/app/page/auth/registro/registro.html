@@ -1,1 +1,94 @@
-<p>registro works!</p>
+<div class="auth-container">
+  <div class="auth-card form-registro">
+    <div class="auth-header">
+      <h2>Nuevo Paciente</h2>
+      <p>Regístrate en el Centro de Salud Poquian</p>
+    </div>
+
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombres</label>
+          <input type="text" formControlName="nombre" placeholder="Ej. Juan"
+                 [class.input-error]="registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched">
+          <small class="error-msg" *ngIf="registroForm.get('nombre')?.hasError('required') && registroForm.get('nombre')?.touched">
+            El nombre es obligatorio.
+          </small>
+          <small class="error-msg" *ngIf="registroForm.get('nombre')?.hasError('minlength') && registroForm.get('nombre')?.touched">
+            Mínimo 2 caracteres.
+          </small>
+        </div>
+        <div class="form-group">
+          <label>Apellidos</label>
+          <input type="text" formControlName="apellido" placeholder="Ej. Pérez"
+                 [class.input-error]="registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched">
+          <small class="error-msg" *ngIf="registroForm.get('apellido')?.hasError('required') && registroForm.get('apellido')?.touched">
+            El apellido es obligatorio.
+          </small>
+          <small class="error-msg" *ngIf="registroForm.get('apellido')?.hasError('minlength') && registroForm.get('apellido')?.touched">
+            Mínimo 2 caracteres.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>DNI</label>
+          <input type="text" formControlName="dni" maxlength="8" placeholder="8 dígitos"
+                 [class.input-error]="registroForm.get('dni')?.invalid && registroForm.get('dni')?.touched">
+          <small class="error-msg" *ngIf="registroForm.get('dni')?.hasError('required') && registroForm.get('dni')?.touched">
+            El DNI es obligatorio.
+          </small>
+          <small class="error-msg" *ngIf="(registroForm.get('dni')?.hasError('pattern') || registroForm.get('dni')?.hasError('minlength') || registroForm.get('dni')?.hasError('maxlength')) && registroForm.get('dni')?.touched && !registroForm.get('dni')?.hasError('required')">
+            El DNI debe tener exactamente 8 dígitos numéricos.
+          </small>
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="text" formControlName="telefono" maxlength="9" placeholder="Ej. 987654321"
+                 [class.input-error]="registroForm.get('telefono')?.invalid && registroForm.get('telefono')?.touched">
+          <small class="error-msg" *ngIf="registroForm.get('telefono')?.hasError('required') && registroForm.get('telefono')?.touched">
+            El teléfono es obligatorio.
+          </small>
+          <small class="error-msg" *ngIf="registroForm.get('telefono')?.hasError('pattern') && registroForm.get('telefono')?.touched && !registroForm.get('telefono')?.hasError('required')">
+            El teléfono debe tener 9 dígitos numéricos.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" formControlName="correo" placeholder="juan@ejemplo.com"
+               [class.input-error]="registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched">
+        <small class="error-msg" *ngIf="registroForm.get('correo')?.hasError('required') && registroForm.get('correo')?.touched">
+          El correo es obligatorio.
+        </small>
+        <small class="error-msg" *ngIf="registroForm.get('correo')?.hasError('email') && registroForm.get('correo')?.touched && !registroForm.get('correo')?.hasError('required')">
+          Ingresa un correo válido (ej. usuario@dominio.com).
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres"
+               [class.input-error]="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
+        <small class="error-msg" *ngIf="registroForm.get('password')?.hasError('required') && registroForm.get('password')?.touched">
+          La contraseña es obligatoria.
+        </small>
+        <small class="error-msg" *ngIf="registroForm.get('password')?.hasError('minlength') && registroForm.get('password')?.touched && !registroForm.get('password')?.hasError('required')">
+          La contraseña debe tener al menos 6 caracteres.
+        </small>
+      </div>
+
+      <div class="error-banner" *ngIf="mensajeError">
+        ⚠️ {{ mensajeError }}
+      </div>
+
+      <button type="submit" [disabled]="registroForm.invalid || cargando" class="btn-submit">
+        {{ cargando ? 'Registrando...' : 'Registrarme' }}
+      </button>
+    </form>
+
+    <p class="auth-footer">¿Ya tienes cuenta? <a routerLink="/auth/login">Ingresa aquí</a></p>
+  </div>
+</div>

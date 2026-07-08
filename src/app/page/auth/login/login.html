@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Centro de Salud Poquian</h2>
+      <p>Ingresa a tu portal de salud</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-group">
+        <label>DNI o Correo Electrónico</label>
+        <input type="text" formControlName="identificador" placeholder="Ingresa tu documento o email"
+               [class.input-error]="loginForm.get('identificador')?.invalid && loginForm.get('identificador')?.touched">
+        <small class="error-msg" *ngIf="loginForm.get('identificador')?.hasError('required') && loginForm.get('identificador')?.touched">
+          Este campo es obligatorio.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" placeholder="••••••••"
+               [class.input-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        <small class="error-msg" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+          Este campo es obligatorio.
+        </small>
+      </div>
+
+      <div class="error-banner" *ngIf="mensajeError">
+        ⚠️ {{ mensajeError }}
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid || cargando" class="btn-submit">
+        {{ cargando ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+    </form>
+
+    <p class="auth-footer">¿No tienes cuenta? <a routerLink="/auth/registro">Regístrate aquí</a></p>
+  </div>
+</div>

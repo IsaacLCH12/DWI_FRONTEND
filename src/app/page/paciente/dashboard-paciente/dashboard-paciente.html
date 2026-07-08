@@ -1,1 +1,105 @@
-<p>dashboard-paciente works!</p>
+<app-navbar></app-navbar>
+
+<div class="paciente-dashboard-container">
+  <!-- Sección Principal: Botones Rápidos -->
+  <section class="welcome-section">
+    <div class="welcome-content">
+      <h1>Hola, <span class="highlight">{{ nombrePaciente }}</span></h1>
+      <p>Bienvenido a tu portal de salud. ¿Qué deseas hacer hoy?</p>
+    </div>
+    
+    <div class="cards-grid">
+      <div *ngFor="let t of tarjetas" class="action-card" [style.background]="t.color" [routerLink]="t.ruta">
+        <div class="card-icon">{{ t.icono }}</div>
+        <h3>{{ t.titulo }}</h3>
+        <p>{{ t.desc }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección: Nuestras Especialidades -->
+  <section class="section-especialidades">
+    <div class="section-header">
+      <span class="subtitle">Servicios</span>
+      <h2>Nuestras especialidades</h2>
+      <p class="desc">Contamos con los mejores especialistas para cuidar tu salud.</p>
+    </div>
+
+    <div class="grid-especialidades" *ngIf="!cargandoEspecialidades">
+      <div class="especialidad-card" *ngFor="let e of especialidades">
+        <!-- Ícono simulado basado en el nombre -->
+        <div class="icon-wrapper">
+          <img src="https://cdn-icons-png.flaticon.com/512/3004/3004458.png" alt="Especialidad Icon">
+        </div>
+        <p>{{ e.nombre }}</p>
+      </div>
+    </div>
+    <div *ngIf="cargandoEspecialidades" class="loading-state">
+      <p>Cargando especialidades...</p>
+    </div>
+  </section>
+
+  <!-- Sección: Staff Médico -->
+  <section class="section-medicos">
+    <div class="section-header">
+      <span class="subtitle">Staff Médico</span>
+      <h2>Nuestros Doctores</h2>
+    </div>
+
+    <div class="grid-medicos" *ngIf="!cargandoMedicos">
+      <div class="medico-card" *ngFor="let m of medicos">
+        <img [src]="m.fotoUrl || 'https://cdn-icons-png.flaticon.com/512/3774/3774299.png'" alt="Doctor">
+        <div class="medico-info">
+          <h3>Dr. {{ m.nombre }} {{ m.apellido }}</h3>
+          <p class="especialidad">{{ m.nombreServicio || 'Especialista' }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="cargandoMedicos" class="loading-state">
+      <p>Cargando médicos...</p>
+    </div>
+  </section>
+
+  <!-- Sección: Certificaciones y Pagos -->
+  <section class="section-certificaciones">
+    <div class="cert-container">
+      <div class="iso-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ISO_Logo_%28Red_square%29.svg/1024px-ISO_Logo_%28Red_square%29.svg.png" alt="ISO" class="iso-logo">
+        <p>Contamos con la certificación del Sistema de Gestión de Calidad ISO 9001 2015 en Atención al Cliente y Servicio de Hospitalización. La Norma ISO 9001 2015 es considerada como un referente mundial que ayuda a las organizaciones a desarrollar, implementar y mejorar la eficacia de nuestros procesos para lograr la excelencia a través de la mejora continua.</p>
+      </div>
+      
+      <div class="pagos-box">
+        <h3>Pagos 100% Seguros</h3>
+        <div class="logos-pagos">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png" alt="American Express">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Diners_Club_Logo3.svg/1200px-Diners_Club_Logo3.svg.png" alt="Diners Club">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Moderno -->
+  <footer class="paciente-footer">
+    <div class="footer-content">
+      <div class="footer-col" *ngFor="let s of sedes">
+        <h3>Sede {{ s.nombre }}</h3>
+        <p>📍 {{ s.direccion || 'Dirección de la sede' }}</p>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Información Institucional</h3>
+        <ul>
+          <li><a href="#">Trabaja con Nosotros</a></li>
+          <li><a href="#">Política de Privacidad</a></li>
+          <li><a href="#">Términos y Condiciones</a></li>
+          <li><a href="#">Libro de Reclamaciones</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Centro de Salud Poquian. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,91 @@
+.paciente-page {
+  padding: 2rem 5%;
+  background: #f8fafc;
+  min-height: calc(100vh - 70px);
+  h2 {
+    color: #0f172a;
+    margin-bottom: 2rem;
+  }
+}
+.grid-citas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.cita-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #1d4ed8;
+}
+.cita-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  h3 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 1.1rem;
+  }
+}
+.btn-cancelar {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background: #fee2e2;
+  }
+}
+.badge-blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.badge-green {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.badge-red {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.paciente-table {
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    background: #f1f5f9;
+    padding: 1rem;
+    text-align: left;
+    color: #475569;
+  }
+  td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+}
