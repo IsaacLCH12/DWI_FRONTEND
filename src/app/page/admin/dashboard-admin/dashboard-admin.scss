@@ -1,13 +1,11 @@
-.admin-header { margin-bottom: 2rem; h2 { color: #0F172A; font-size: 1.8rem; margin: 0 0 0.5rem 0; } p { color: #64748B; margin: 0; } }
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-.stat-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 1.5rem; border-left: 4px solid #1D4ED8;
-  .icon-wrapper { font-size: 2rem; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
-  .bg-blue { background: #EFF6FF; color: #1D4ED8; }
-  .bg-teal { background: #F0FDFA; color: #0D9488; border-left-color: #0D9488; }
-  .bg-indigo { background: #EEF2FF; color: #4338CA; border-left-color: #4338CA; }
+.header-section { margin-bottom: 2rem; h2 { color: #0F172A; font-size: 1.8rem; margin: 0 0 0.5rem 0; } p { color: #64748B; margin: 0; } }
+.dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.dashboard-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 1.5rem; border-left: 4px solid #1D4ED8;
+  .card-icon { font-size: 2rem; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 12px; background: #EFF6FF; color: #1D4ED8;}
+  &.card-sedes .card-icon { background: #F0FDFA; color: #0D9488; }
+  &.card-sedes { border-left-color: #0D9488; }
+  &.card-servicios .card-icon { background: #EEF2FF; color: #4338CA; }
+  &.card-servicios { border-left-color: #4338CA; }
   h3 { margin: 0; color: #64748B; font-size: 0.95rem; font-weight: 600; }
-  h2 { margin: 0; color: #0F172A; font-size: 2rem; }
+  .card-number { margin: 0; color: #0F172A; font-size: 2rem; display: block; font-weight: bold;}
 }
-.acciones-rapidas { h3 { color: #1E293B; margin-bottom: 1.5rem; } }
-.botones-grid { display: flex; gap: 1rem; }
-.btn-accion { background: white; border: 1px solid #CBD5E1; color: #1E293B; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; &:hover { border-color: #1D4ED8; color: #1D4ED8; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.1); } }

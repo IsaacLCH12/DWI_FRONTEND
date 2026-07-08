@@ -17,10 +17,10 @@ export class GestionSedes implements OnInit {
   private sedeService = inject(SedeService);
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
-  
+
   listaSedes: any[] = [];
   cargando = true;
-  
+
   mostrarModalForm = false;
   mostrarModalConfirm = false;
   sedeSeleccionada: any = null;
@@ -73,8 +73,8 @@ export class GestionSedes implements OnInit {
   guardar() {
     if (this.sedeForm.invalid) return;
     this.guardando = true;
-    
-    const obs = this.modoEdicion 
+
+    const obs = this.modoEdicion
       ? this.sedeService.actualizarSede(this.sedeSeleccionada.id, this.sedeForm.value)
       : this.sedeService.crearSede(this.sedeForm.value);
 
