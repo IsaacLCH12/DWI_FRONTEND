@@ -6,6 +6,7 @@ import { GestionServicios } from './gestion-servicios/gestion-servicios';
 import { GestionHorarios } from './gestion-horarios/gestion-horarios';
 import { GestionCitas } from './gestion-citas/gestion-citas';
 import { GestionPagos } from './gestion-pagos/gestion-pagos';
+import { GestionPacientes } from './gestion-pacientes/gestion-pacientes';
 
 export const adminRoutes: Routes = [
   { path: '', component: DashboardAdmin },
@@ -14,9 +15,7 @@ export const adminRoutes: Routes = [
     { path: 'servicios', component: GestionServicios},
 
   {
-    path: 'pacientes',
-    loadComponent: () => import('./gestion-pacientes/gestion-pacientes').then(m => m.GestionPacientes)
-  },
+    path: 'pacientes',component: GestionPacientes},
   { path: 'horarios', component: GestionHorarios },
   { path: 'citas', component: GestionCitas },
     { path: 'pagos', component: GestionPagos},
