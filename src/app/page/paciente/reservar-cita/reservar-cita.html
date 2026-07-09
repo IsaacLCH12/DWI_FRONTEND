@@ -1,44 +1,77 @@
 <app-navbar></app-navbar>
+
 <div class="paciente-container">
   <div class="reserva-card">
-    <h2>Agendar Nueva Cita</h2>
-
-    <div *ngIf="paso === 1" class="form-step">
-      <label>1. Selecciona la Sede</label>
-      <select [(ngModel)]="reserva.sedeId" class="form-control">
-        <option [value]="null" disabled>Elige una sede...</option>
-        <option *ngFor="let s of sedes" [value]="s.id">{{ s.nombre }}</option>
-      </select>
-
-      <label>2. Selecciona la Especialidad</label>
-      <select [(ngModel)]="reserva.servicioId" class="form-control">
-        <option [value]="null" disabled>Elige una especialidad...</option>
-        <option *ngFor="let s of servicios" [value]="s.id">{{ s.nombre }}</option>
-      </select>
-      <button (click)="avanzar()" [disabled]="!reserva.sedeId || !reserva.servicioId" class="btn-blue">Siguiente Paso</button>
+    <div class="reserva-header">
+      <h2>Agendar Nueva Cita</h2>
+      <p>Sigue los pasos para confirmar tu atención médica.</p>
     </div>
 
-    <div *ngIf="paso === 2" class="form-step">
-      <label>3. Selecciona tu Médico</label>
-      <select [(ngModel)]="reserva.medicoId" class="form-control">
-        <option [value]="null" disabled>Elige un especialista...</option>
-        <option *ngFor="let m of medicos" [value]="m.id">Dr. {{ m.nombre }} {{ m.apellido }}</option>
-      </select>
+    <div class="stepper-indicator">
+      <div class="step" [class.active]="paso >= 1"><div class="circle">1</div><span>Lugar</span></div>
+      <div class="line" [class.active]="paso >= 2"></div>
+      <div class="step" [class.active]="paso >= 2"><div class="circle">2</div><span>Médico</span></div>
+      <div class="line" [class.active]="paso >= 3"></div>
+      <div class="step" [class.active]="paso === 3"><div class="circle">3</div><span>Horario</span></div>
+    </div>
+
+    <div *ngIf="paso === 1" class="form-step slide-in">
+      <div class="form-group">
+        <label>¿En qué sede te quieres atender?</label>
+        <select [(ngModel)]="reserva.sedeId" class="form-control">
+          <option [value]="null" disabled selected>Elige una sede...</option>
+          <option *ngFor="let s of sedes" [value]="s.id">{{ s.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>¿Qué especialidad necesitas?</label>
+        <select [(ngModel)]="reserva.servicioId" class="form-control">
+          <option [value]="null" disabled selected>Elige una especialidad...</option>
+          <option *ngFor="let s of servicios" [value]="s.id">{{ s.nombre }}</option>
+        </select>
+      </div>
+
+      <button (click)="avanzar()" [disabled]="!reserva.sedeId || !reserva.servicioId" class="btn-blue full-width">Siguiente Paso ➔</button>
+    </div>
+
+    <div *ngIf="paso === 2" class="form-step slide-in">
+      <div class="form-group">
+        <label>Especialistas Disponibles</label>
+        <select [(ngModel)]="reserva.medicoId" class="form-control custom-select">
+          <option [value]="null" disabled selected>Elige un doctor...</option>
+          <option *ngFor="let m of medicos" [value]="m.id">👨‍⚕️ Dr(a). {{ m.nombre }} {{ m.apellido }}</option>
+        </select>
+        <small class="error-msg" *ngIf="medicos.length === 0">No hay doctores disponibles para esta combinación.</small>
+      </div>
+
       <div class="btn-group">
-        <button (click)="retroceder()" class="btn-outline">Volver</button>
-        <button (click)="avanzar()" [disabled]="!reserva.medicoId" class="btn-blue">Ver Horarios</button>
+        <button (click)="retroceder()" class="btn-outline">🡠 Volver</button>
+        <button (click)="avanzar()" [disabled]="!reserva.medicoId" class="btn-blue">Ver Horarios ➔</button>
       </div>
     </div>
 
-    <div *ngIf="paso === 3" class="form-step">
-      <label>4. Elige un Horario Disponible</label>
-      <select [(ngModel)]="reserva.horarioId" class="form-control">
-        <option [value]="null" disabled>Elige una hora...</option>
-        <option *ngFor="let h of horarios" [value]="h.id">{{ h.fecha }} - {{ h.horaInicio }}</option>
-      </select>
+    <div *ngIf="paso === 3" class="form-step slide-in">
+
+      <div class="form-group">
+        <label>¿Qué día deseas atenderte?</label>
+        <input type="date" [(ngModel)]="fechaCita" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Horarios Disponibles</label>
+        <select [(ngModel)]="reserva.horarioId" class="form-control custom-select">
+          <option [value]="null" disabled selected>Elige el turno...</option>
+          <option *ngFor="let h of horarios" [value]="h.id">
+            Día {{ h.diaSemana }} ⏰ {{ h.horaInicio }} a {{ h.horaFin }}
+          </option>
+        </select>
+        <small class="error-msg" *ngIf="horarios.length === 0">Este doctor no tiene horarios configurados.</small>
+      </div>
+
       <div class="btn-group">
-        <button (click)="retroceder()" class="btn-outline">Volver</button>
-        <button (click)="confirmar()" [disabled]="!reserva.horarioId" class="btn-green">Confirmar Reserva</button>
+        <button (click)="retroceder()" class="btn-outline">🡠 Volver</button>
+        <button (click)="confirmar()" [disabled]="!reserva.horarioId || !fechaCita" class="btn-green">✅ Confirmar Reserva</button>
       </div>
     </div>
   </div>

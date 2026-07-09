@@ -1,17 +1,116 @@
 <app-navbar></app-navbar>
-<div class="paciente-page">
-  <h2>Estado de Cuenta y Pagos</h2>
-  <div class="table-container">
-    <table class="paciente-table">
-      <thead><tr><th>ID Recibo</th><th>Monto</th><th>Fecha de Pago</th><th>Estado</th></tr></thead>
-      <tbody>
-        <tr *ngFor="let p of pagos">
-          <td>#{{ p.id }}</td>
-          <td><strong>S/. {{ p.monto }}</strong></td>
-          <td>{{ p.fecha }}</td>
-          <td><span class="badge-green">Pagado</span></td>
-        </tr>
-      </tbody>
-    </table>
+
+<div class="pagos-container">
+
+  <div class="pago-form-card" *ngIf="citaIdAPagar">
+    <div class="form-header">
+      <h3>💳 Procesar Pago - Cita #{{ citaIdAPagar }}</h3>
+      <div class="monto-badge">Total: S/ {{ montoFijo | number:'1.2-2' }}</div>
+    </div>
+
+    <div class="form-group main-group">
+      <label>Selecciona tu Método de Pago</label>
+      <select [(ngModel)]="metodoPago" class="form-select">
+        <option value="" disabled selected>Elige una opción...</option>
+        <option value="YAPE">📱 Billetera Digital (Yape / Plin)</option>
+        <option value="TARJETA">💳 Tarjeta de Crédito / Débito</option>
+      </select>
+    </div>
+
+    <div *ngIf="metodoPago === 'YAPE' || metodoPago === 'PLIN'" class="qr-payment-box">
+      <h4>Escanea para pagar</h4>
+      <p>Abre tu app de Yape o Plin y escanea el código qr de la clínica.</p>
+
+      <div class="qr-wrapper">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=PagoClinicaMonto50" alt="QR Pago">
+      </div>
+
+      <div class="form-group operation-field">
+        <label>N° de Operación</label>
+        <input type="text"
+               [(ngModel)]="numeroOperacionYape"
+               (input)="soloNumeros($event, 'yape')"
+               maxlength="12"
+               class="form-input"
+               placeholder="Ej: 123456789">
+      </div>
+    </div>
+
+    <div *ngIf="metodoPago === 'TARJETA'" class="card-payment-box">
+      <h4>Datos de la Tarjeta</h4>
+
+      <div class="form-group">
+        <label>Titular de la Tarjeta</label>
+        <input type="text" [(ngModel)]="datosTarjeta.titular" placeholder="EJ: JORGE CHICANA" class="form-input text-uppercase">
+      </div>
+
+      <div class="form-group">
+        <label>Número de Tarjeta</label>
+        <input type="text" [(ngModel)]="datosTarjeta.numero" (input)="soloNumeros($event, 'numero')" maxlength="16" placeholder="0000 0000 0000 0000" class="form-input card-number">
+      </div>
+
+      <div class="form-row-inline">
+        <div class="form-group">
+          <label>Vencimiento</label>
+          <input type="text" [(ngModel)]="datosTarjeta.expira" (input)="formatearExpiracion($event)" maxlength="5" placeholder="MM/YY" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>CVV</label>
+          <input type="password" [(ngModel)]="datosTarjeta.cvv" (input)="soloNumeros($event, 'cvv')" maxlength="4" placeholder="***" class="form-input">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-submit-pago"
+            (click)="registrarPago()"
+            [disabled]="procesandoPago || !formularioValido()"
+            [class.disabled-btn]="!formularioValido() || procesandoPago">
+      {{ procesandoPago ? 'Procesando de forma segura...' : '🔒 Confirmar Pago de S/ ' + (montoFijo | number:'1.2-2') }}
+    </button>
   </div>
+
+  <div class="historial-card">
+    <h2>Historial de Pagos</h2>
+
+    <div *ngIf="cargando" class="loading-text">
+      ⏳ Cargando tus pagos...
+    </div>
+
+    <div class="table-responsive" *ngIf="!cargando && pagos.length > 0">
+      <table class="pagos-table">
+        <thead>
+          <tr>
+            <th>ID Cita</th>
+            <th>Método</th>
+            <th>N° Operación</th>
+            <th>Monto</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pagos">
+            <td>#{{ p.citaId }}</td>
+            <td>
+              <span class="metodo-label">
+                {{ p.metodoPago === 'TARJETA' ? '💳 Tarjeta' : '📱 Yape/Plin' }}
+              </span>
+            </td>
+            <td class="numero-operacion">{{ p.numeroOperacion }}</td>
+            <td class="monto-valor">S/ {{ (p.montoTotal || p.monto) | number:'1.2-2' }}</td>
+            <td>
+              <span class="badge-pago"
+                    [ngClass]="p.estado === 'VALIDADO' ? 'pago-validado' : 'pago-pendiente'">
+                {{ p.estado || 'PENDIENTE' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="!cargando && pagos.length === 0" class="empty-history">
+      Aún no has registrado ningún pago en el sistema.
+    </div>
+  </div>
+
 </div>

@@ -6,9 +6,13 @@
   <nav class="sidebar-nav">
     <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">📊 Dashboard</a>
     <a routerLink="/admin/medicos" routerLinkActive="active">👨‍⚕️ Médicos</a>
+    <a routerLink="/admin/horarios" routerLinkActive="active">📅 Horarios</a>
     <a routerLink="/admin/sedes" routerLinkActive="active">🏥 Sedes</a>
     <a routerLink="/admin/servicios" routerLinkActive="active">🩺 Servicios</a>
+   <a routerLink="/admin/citas" routerLinkActive="active">📋 Citas</a>
     <a routerLink="/admin/pacientes" routerLinkActive="active">🧑‍🤝‍🧑 Pacientes</a>
+    <a routerLink="/admin/pagos" routerLinkActive="active">💵 Pagos</a>
+
   </nav>
   <div class="sidebar-footer">
     <button class="btn-logout" (click)="cerrarSesion()">Cerrar Sesión</button>

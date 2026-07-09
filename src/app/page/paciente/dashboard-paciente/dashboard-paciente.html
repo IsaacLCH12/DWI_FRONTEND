@@ -7,7 +7,7 @@
       <h1>Hola, <span class="highlight">{{ nombrePaciente }}</span></h1>
       <p>Bienvenido a tu portal de salud. ¿Qué deseas hacer hoy?</p>
     </div>
-    
+
     <div class="cards-grid">
       <div *ngFor="let t of tarjetas" class="action-card" [style.background]="t.color" [routerLink]="t.ruta">
         <div class="card-icon">{{ t.icono }}</div>
@@ -64,17 +64,17 @@
   <section class="section-certificaciones">
     <div class="cert-container">
       <div class="iso-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ISO_Logo_%28Red_square%29.svg/1024px-ISO_Logo_%28Red_square%29.svg.png" alt="ISO" class="iso-logo">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqOFYXR31IXWjGvnmJbrEAlU3UuyXClIr2tYRC9Ky1iNcVIhXEoXmtYGmGlfOAUAaWD2ZM4I3A1mVf_HeZcs5AZNroC5YCZyJpWwZRKsCDWMLmYG3fnsug_rf6PE1Hb276evcDb0taOHnJIuYiDij0CKAXqtU0gVWFHJZo53BkupCiNWDiiJTdZL4p/w1200-h675-p-k-no-nu/iso_org%20(1)%20(1).jpg" alt="ISO" class="iso-logo">
         <p>Contamos con la certificación del Sistema de Gestión de Calidad ISO 9001 2015 en Atención al Cliente y Servicio de Hospitalización. La Norma ISO 9001 2015 es considerada como un referente mundial que ayuda a las organizaciones a desarrollar, implementar y mejorar la eficacia de nuestros procesos para lograr la excelencia a través de la mejora continua.</p>
       </div>
-      
+
       <div class="pagos-box">
         <h3>Pagos 100% Seguros</h3>
         <div class="logos-pagos">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa">
+          <img src="https://www.visa.com.pe/content/dam/VCOM/global/about-visa/images/visa-brandmark-blue-1960x622.png" alt="Visa">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png" alt="American Express">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Diners_Club_Logo3.svg/1200px-Diners_Club_Logo3.svg.png" alt="Diners Club">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="American Express">
+          <img src="https://cdn.worldvectorlogo.com/logos/diners-club-international-2.svg" alt="Diners Club">
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@
         <h3>Sede {{ s.nombre }}</h3>
         <p>📍 {{ s.direccion || 'Dirección de la sede' }}</p>
       </div>
-      
+
       <div class="footer-col">
         <h3>Información Institucional</h3>
         <ul>

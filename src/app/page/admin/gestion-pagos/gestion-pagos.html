@@ -1,0 +1,68 @@
+<div class="admin-layout">
+  <app-sidebar></app-sidebar>
+
+  <main class="admin-main">
+    <div class="page-header">
+      <h2>Control Central de Pagos</h2>
+      <p>Verifica los números de operación y pasarelas antes de aprobar las citas médicas.</p>
+    </div>
+
+    <div class="table-container">
+      <div *ngIf="cargando" class="loading-spinner">
+        ⏳ Cargando transacciones del sistema...
+      </div>
+
+      <table *ngIf="!cargando">
+        <thead>
+          <tr>
+            <th>ID Pago</th>
+            <th>ID Cita</th>
+            <th>Pasarela / Método</th>
+            <th>Código de Operación</th>
+            <th>Monto Recibido</th>
+            <th>Estado</th>
+            <th>Acciones de Caja</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pagos">
+            <td>#{{ p.id }}</td>
+            <td class="id-destacado">Cita #{{ p.citaId }}</td>
+            <td>
+              <span class="metodo-tag">
+                {{ p.metodoPago === 'TARJETA' ? '💳 Tarjeta de Crédito/Débito' : '📱 Billetera Digital' }}
+              </span>
+            </td>
+            <td class="codigo-operacion">{{ p.numeroOperacion }}</td>
+            <td class="monto-texto">S/ {{ (p.montoTotal || p.monto) | number:'1.2-2' }}</td>
+            <td>
+              <span class="badge" [ngClass]="getBadgeClass(p.estado)">
+                {{ p.estado || 'PENDIENTE' }}
+              </span>
+            </td>
+            <td>
+              <div class="action-row" *ngIf="!p.estado || p.estado === 'PENDIENTE'">
+                <button class="btn-action approve"
+                        title="Validar Transferencia"
+                        (click)="validarPago(p)">
+                  ✅ Validar
+                </button>
+                <button class="btn-action reject"
+                        title="Rechazar Comprobante"
+                        (click)="rechazarPago(p)">
+                  ❌ Rechazar
+                </button>
+              </div>
+              <span class="text-finalizado" *ngIf="p.estado && p.estado !== 'PENDIENTE'">
+                Procesado
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="pagos.length === 0">
+            <td colspan="7" class="empty-table">No se registran movimientos de caja en el sistema.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

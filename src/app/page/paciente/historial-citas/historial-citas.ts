@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../../../shared/components/navbar/navbar';
 import { CitaService } from '../../../core/services/cita.service';
@@ -12,19 +12,27 @@ import { CitaService } from '../../../core/services/cita.service';
 })
 export class HistorialCitas implements OnInit {
   private citaSrv = inject(CitaService);
+  private cdr = inject(ChangeDetectorRef);
+
   citasPasadas: any[] = [];
   cargando = true;
 
   ngOnInit() {
+    this.cargarHistorial();
+  }
+
+  cargarHistorial() {
     this.cargando = true;
-    this.citaSrv.getAllCitas().subscribe({
+    this.citaSrv.getHistorial().subscribe({
       next: (res: any[]) => {
-        this.citasPasadas = res.filter((c: any) => c.estado !== 'PENDIENTE');
+        this.citasPasadas = res;
         this.cargando = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.citasPasadas = [];
         this.cargando = false;
+        this.cdr.detectChanges();
       }
     });
   }

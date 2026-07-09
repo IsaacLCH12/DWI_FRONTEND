@@ -1,26 +1,49 @@
 <app-navbar></app-navbar>
-<div class="paciente-page">
+<div class="paciente-page" style="padding: 2rem;">
   <h2>Mis Citas Pendientes</h2>
 
-  <app-spinner-carga [visible]="cargando"></app-spinner-carga>
+  <div *ngIf="cargando" style="text-align: center; color: #64748b; padding: 2rem;">
+    ⏳ Cargando tus reservas...
+  </div>
 
-  <div class="grid-citas" *ngIf="!cargando">
-    <div class="cita-card" *ngFor="let c of citas">
-      <div class="cita-header">
-        <h3>Especialidad: {{ c.servicioNombre }}</h3>
-        <span class="badge-blue">PENDIENTE</span>
+  <div class="grid-citas" style="display: grid; gap: 1rem; margin-top: 1.5rem;" *ngIf="!cargando && citas.length > 0">
+    <div class="cita-card" *ngFor="let c of citas" style="border: 1px solid #e2e8f0; padding: 1.5rem; border-radius: 8px; background: white;">
+
+      <div class="cita-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="margin: 0;">{{ c.nombreServicio }}</h3>
+        <span style="padding: 0.3rem 0.8rem; border-radius: 15px; font-weight: bold; font-size: 0.85rem;"
+              [ngStyle]="{'background': c.estadoCita === 'PROGRAMADA' ? '#DBEAFE' : '#FEE2E2',
+                          'color': c.estadoCita === 'PROGRAMADA' ? '#1D4ED8' : '#DC2626'}">
+          {{ c.estadoCita }}
+        </span>
       </div>
-      <p><strong>Dr(a).</strong> {{ c.medicoNombre }}</p>
-      <p><strong>Sede:</strong> {{ c.sedeNombre }}</p>
-      <p><strong>Fecha y Hora:</strong> {{ c.fecha }} a las {{ c.hora }}</p>
-      <button class="btn-cancelar" (click)="abrirModal(c.id)">Anular Cita</button>
+
+      <p style="margin: 0.5rem 0;"><strong>Dr(a).</strong> {{ c.nombreMedico }}</p>
+      <p style="margin: 0.5rem 0;"><strong>Sede:</strong> {{ c.nombreSede }}</p>
+      <p style="margin: 0.5rem 0; color: #64748b;"><strong>Fecha:</strong> {{ c.fechaHora | date:'medium' }}</p>
+
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem;" *ngIf="c.estadoCita === 'PROGRAMADA'">
+        <button (click)="cancelar(c.id)" [disabled]="c.yaPagada"
+                [style.opacity]="c.yaPagada ? '0.5' : '1'"
+                [style.cursor]="c.yaPagada ? 'not-allowed' : 'pointer'"
+                style="padding: 0.5rem 1rem; background: transparent; color: #dc2626; border: 1px solid #dc2626; border-radius: 5px; font-weight: bold;">
+          Cancelar Cita
+        </button>
+
+       <button *ngIf="!c.yaPagada" class="btn-pagar" (click)="irAPagar(c)">
+  💳 Pagar S/ {{ c.precioServicio | number:'1.2-2' }}
+</button>
+
+        <button *ngIf="c.yaPagada" disabled
+                style="padding: 0.5rem 1rem; background: #fef3c7; color: #d97706; border: 1px solid #fcd34d; border-radius: 5px; cursor: not-allowed; font-weight: bold; flex: 1;">
+          ⏳ Pago en revisión
+        </button>
+      </div>
+
     </div>
-    <div *ngIf="citas.length === 0" class="empty-state">No tiene citas hasta el momento.</div>
+  </div>
+
+  <div *ngIf="!cargando && citas.length === 0" style="text-align: center; color: #64748b; padding: 3rem; background: #f8fafc; border-radius: 8px; margin-top: 1.5rem;">
+    No tienes citas pendientes por ahora.
   </div>
 </div>
-
-<app-modal-confirmacion
-  [visible]="mostrarModal"
-  (onCancelar)="cerrarModal()"
-  (onConfirmar)="cancelar()">
-</app-modal-confirmacion>

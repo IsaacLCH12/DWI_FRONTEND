@@ -3,17 +3,23 @@ import { DashboardAdmin } from './dashboard-admin/dashboard-admin';
 import { GestionMedicos } from './gestion-medicos/gestion-medicos';
 import { GestionSedes } from './gestion-sedes/gestion-sedes';
 import { GestionServicios } from './gestion-servicios/gestion-servicios';
+import { GestionHorarios } from './gestion-horarios/gestion-horarios';
+import { GestionCitas } from './gestion-citas/gestion-citas';
+import { GestionPagos } from './gestion-pagos/gestion-pagos';
 
 export const adminRoutes: Routes = [
   { path: '', component: DashboardAdmin },
   { path: 'medicos', component: GestionMedicos },
   { path: 'sedes', component: GestionSedes },
-  {
-    path: 'servicios',
-    loadComponent: () => import('./gestion-servicios/gestion-servicios').then(m => m.GestionServicios)
-  },
+    { path: 'servicios', component: GestionServicios},
+
   {
     path: 'pacientes',
     loadComponent: () => import('./gestion-pacientes/gestion-pacientes').then(m => m.GestionPacientes)
-  }
+  },
+  { path: 'horarios', component: GestionHorarios },
+  { path: 'citas', component: GestionCitas },
+    { path: 'pagos', component: GestionPagos},
+
+
 ];

@@ -7,15 +7,15 @@ export class CitaService {
   private http = inject(HttpClient);
   private url = `${environment.apiUrl}/citas`;
 
-  getAllCitas() {
-    return this.http.get<any[]>(this.url);
-  }
+  // Para el paciente
+  getMisCitas() { return this.http.get<any[]>(this.url); }
+  crearCita(data: any) { return this.http.post(this.url, data); }
 
-  crearCita(data: any) {
-    return this.http.post(this.url, data);
-  }
-
-  cancelarCita(id: number) {
-    return this.http.put(`${this.url}/${id}/cancelar`, {});
-  }
+  // Para el administrador (NUEVOS)
+  getAllCitas() { return this.http.get<any[]>(this.url); }
+  actualizarCita(id: number, data: any) { return this.http.put(`${this.url}/${id}`, data); }
+  cancelarCita(id: number) { return this.http.put(`${this.url}/${id}/cancelar`, {}); }
+  getHistorial() {
+  return this.http.get<any[]>(`${this.url}/historial`);
+}
 }

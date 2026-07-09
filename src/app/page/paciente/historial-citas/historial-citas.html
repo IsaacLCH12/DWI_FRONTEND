@@ -1,14 +1,52 @@
 <app-navbar></app-navbar>
-<div class="paciente-page">
-  <h2>Historial Clínico</h2>
-  <div class="grid-citas">
-    <div class="cita-card" *ngFor="let c of citasPasadas">
-      <div class="cita-header">
-        <h3>{{ c.servicioNombre }}</h3>
-        <span [class]="c.estado === 'ATENDIDO' ? 'badge-green' : 'badge-red'">{{ c.estado }}</span>
+
+<div class="historial-page">
+  <div class="page-header">
+    <h2>Historial Clínico</h2>
+    <p>Revisa tus atenciones pasadas, diagnósticos y recetas médicas.</p>
+  </div>
+
+  <div *ngIf="cargando" class="loading-state">
+    <span class="spinner">⏳</span> Buscando tu expediente médico...
+  </div>
+
+  <div class="grid-historial" *ngIf="!cargando && citasPasadas.length > 0">
+    <div class="historial-card" *ngFor="let c of citasPasadas">
+
+      <div class="card-header">
+        <h3>{{ c.nombreServicio }}</h3>
+        <span class="badge badge-atendida">{{ c.estadoCita || 'ATENDIDA' }}</span>
       </div>
-      <p><strong>Dr(a).</strong> {{ c.medicoNombre }}</p>
-      <p><strong>Fecha:</strong> {{ c.fecha }}</p>
+
+      <div class="card-body">
+        <div class="info-row">
+          <span class="icon">👨‍⚕️</span>
+          <p><strong>Médico Tratante:</strong> Dr(a). {{ c.nombreMedico }}</p>
+        </div>
+        <div class="info-row">
+          <span class="icon">🏥</span>
+          <p><strong>Sede de Atención:</strong> {{ c.nombreSede }}</p>
+        </div>
+        <div class="info-row">
+          <span class="icon">📅</span>
+          <p><strong>Fecha:</strong> {{ c.fechaHora | date:'longDate' }} a las {{ c.fechaHora | date:'shortTime' }}</p>
+        </div>
+
+        <div class="medical-notes">
+          <h4>📝 Notas del Médico</h4>
+          <div class="nota-box">
+            <p class="nota-item"><strong>Diagnóstico:</strong> <span class="text-muted">Pendiente de actualización por el médico tratante.</span></p>
+            <p class="nota-item"><strong>Receta:</strong> <span class="text-muted">No se registraron medicamentos en esta sesión.</span></p>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
+
+  <div *ngIf="!cargando && citasPasadas.length === 0" class="empty-state">
+    <div class="empty-icon">🩺</div>
+    <h3>Expediente Limpio</h3>
+    <p>Aún no tienes citas previas en tu historial clínico. Cuando te atiendas con nuestros especialistas, tus resultados aparecerán aquí.</p>
   </div>
 </div>

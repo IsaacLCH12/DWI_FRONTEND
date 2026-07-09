@@ -1,0 +1,84 @@
+<div class="admin-wrapper">
+  <app-sidebar></app-sidebar>
+
+  <main class="admin-content">
+    <div class="header-section">
+      <h2>Gestión de Horarios</h2>
+      <p>Asigna fechas y horas de atención para el staff médico.</p>
+    </div>
+
+    <div class="medico-selector-card">
+      <label>Selecciona un Médico para gestionar su agenda:</label>
+      <select [(ngModel)]="medicoSeleccionado" (change)="cargarHorariosMedico()" class="form-control">
+        <option [value]="null" disabled selected>Elige un especialista...</option>
+        <option *ngFor="let m of medicos" [value]="m.id">👨‍⚕️ Dr(a). {{ m.nombre }} {{ m.apellido }}</option>
+      </select>
+    </div>
+
+    <div class="horarios-grid" *ngIf="medicoSeleccionado">
+
+      <div class="card form-card">
+        <h3>Añadir Nuevo Horario</h3>
+
+        <div class="form-group">
+          <label>Día de la Semana</label>
+          <select [(ngModel)]="nuevoHorario.diaSemana" class="form-control">
+            <option [value]="null" disabled selected>Elige un día...</option>
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miércoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sábado</option>
+            <option value="7">Domingo</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label>Hora Inicio</label>
+            <input type="time" [(ngModel)]="nuevoHorario.horaInicio" class="form-control">
+          </div>
+          <div>
+            <label>Hora Fin</label>
+            <input type="time" [(ngModel)]="nuevoHorario.horaFin" class="form-control">
+          </div>
+        </div>
+
+        <button class="btn-green full-width" (click)="crearHorario()" [disabled]="guardando" style="margin-top: 1rem;">
+          {{ guardando ? 'Guardando...' : '+ Asignar Horario' }}
+        </button>
+      </div>
+
+      <div class="card table-card">
+        <h3>Agenda Actual del Médico</h3>
+
+        <div *ngIf="cargandoHorarios" class="mensaje-info">⏳ Cargando agenda...</div>
+
+        <div *ngIf="!cargandoHorarios && horariosActuales.length === 0" class="mensaje-alerta">
+          Este médico aún no tiene horarios asignados.
+        </div>
+
+        <table *ngIf="!cargandoHorarios && horariosActuales.length > 0">
+          <thead>
+            <tr>
+              <th>Día</th>
+              <th>Turno</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of horariosActuales">
+              <td>📅 {{ obtenerNombreDia(h.diaSemana) }}</td>
+              <td>⏰ {{ h.horaInicio }} a {{ h.horaFin }}</td>
+              <td>
+                <button class="btn-delete" (click)="eliminarHorario(h.id)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+</div>

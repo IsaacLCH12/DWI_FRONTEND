@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Navbar } from '../../../shared/components/navbar/navbar';
@@ -21,6 +21,8 @@ export class DashboardPaciente implements OnInit {
   private medicoService = inject(MedicoService);
   private sedeService = inject(SedeService);
   private authService = inject(AuthService);
+    private cdr = inject(ChangeDetectorRef);
+
 
   nombrePaciente = 'Paciente';
   especialidades: any[] = [];
@@ -32,39 +34,51 @@ export class DashboardPaciente implements OnInit {
   tarjetas = [
     { titulo: 'Reservar Cita', desc: 'Agenda tu atención médica fácilmente', icono: '📅', ruta: '/paciente/reservar', color: '#dbeafe' },
     { titulo: 'Mis Citas', desc: 'Revisa y gestiona tus citas pendientes', icono: '🩺', ruta: '/paciente/mis-citas', color: '#dcfce7' },
-    { titulo: 'Historial', desc: 'Consulta tu historial de atenciones', icono: '📂', ruta: '/paciente/historial', color: '#fce7f3' },
     { titulo: 'Mis Pagos', desc: 'Revisa tus comprobantes de pago', icono: '💳', ruta: '/paciente/mis-pagos', color: '#fef3c7' },
     { titulo: 'Mi Perfil', desc: 'Actualiza tus datos personales', icono: '👤', ruta: '/paciente/mi-perfil', color: '#ede9fe' },
   ];
 
   ngOnInit() {
     const usuarioId = this.authService.getUsuarioId();
+
     if (usuarioId) {
       this.pacienteService.getPacientePorUsuarioId(usuarioId).subscribe({
         next: (res: any) => {
           if (res) this.nombrePaciente = res.nombre || 'Paciente';
+                  this.cdr.detectChanges(); // Forzamos actualización visual
+
         },
         error: () => this.nombrePaciente = 'Paciente'
       });
     }
+
     this.servicioService.getServiciosActivos().subscribe({
-      next: (res: any[]) => { this.especialidades = res; this.cargandoEspecialidades = false; },
+
+      next: (res: any[]) => {
+        this.especialidades = res; this.cargandoEspecialidades = false;
+              this.cdr.detectChanges(); // Forzamos actualización visual
+ },
+
       error: () => { this.especialidades = []; this.cargandoEspecialidades = false; }
     });
-    
-    // Obtener los doctores públicos
-    this.medicoService.getMedicosActivos().subscribe({
-      next: (res: any[]) => { 
-        this.medicos = res; 
-        this.cargandoMedicos = false; 
+
+    // 💡 CORRECCIÓN: Usamos getAllMedicos() que es el que existe en tu servicio
+    this.medicoService.getAllMedicos().subscribe({
+      next: (res: any[]) => {
+        this.medicos = res;
+        this.cargandoMedicos = false;
+                this.cdr.detectChanges(); // Forzamos actualización visual
+
       },
       error: () => { this.medicos = []; this.cargandoMedicos = false; }
     });
 
-    // Obtener las sedes para el footer
     this.sedeService.getSedesActivas().subscribe({
       next: (res: any[]) => this.sedes = res,
+
       error: () => this.sedes = []
     });
-  }
+
+          this.cdr.detectChanges(); // Forzamos actualización visual
+}
 }

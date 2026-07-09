@@ -1,0 +1,60 @@
+<div class="admin-wrapper">
+  <app-sidebar></app-sidebar>
+
+  <main class="admin-content">
+    <div class="header-section">
+      <h2>Gestión Central de Citas</h2>
+      <p>Administra, aprueba o cancela las reservas de los pacientes.</p>
+    </div>
+
+    <div class="card table-card">
+      <div *ngIf="cargando" class="loading-state">⏳ Cargando citas del sistema...</div>
+
+      <table *ngIf="!cargando">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Paciente</th>
+            <th>Especialidad / Médico</th>
+            <th>Sede</th>
+            <th>Fecha y Hora</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of citas">
+            <td>#{{ c.id }}</td>
+            <td><strong>{{ c.nombrePaciente }}</strong></td>
+            <td>
+              <div>{{ c.nombreServicio }}</div>
+              <small class="text-muted">{{ c.nombreMedico }}</small>
+            </td>
+            <td>{{ c.nombreSede }}</td>
+            <td>{{ c.fechaHora | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+              <span class="badge" [ngClass]="getBadgeClass(c.estadoCita)">
+                {{ c.estadoCita || 'PROGRAMADA' }}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button *ngIf="c.estadoCita === 'PROGRAMADA'"
+                        class="btn-icon btn-approve"
+                        title="Aprobar Cita"
+                        (click)="cambiarEstado(c, 'APROBADA')">✅</button>
+                <button *ngIf="c.estadoCita !== 'CANCELADA'"
+                        class="btn-icon btn-cancel"
+                        title="Cancelar Cita"
+                        (click)="cancelar(c.id)">❌</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="citas.length === 0">
+            <td colspan="7" class="text-center">No hay citas registradas en el sistema.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

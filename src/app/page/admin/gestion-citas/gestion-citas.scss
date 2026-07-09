@@ -1,0 +1,37 @@
+.admin-wrapper { display: flex; min-height: 100vh; background-color: #F8FAFC; }
+.admin-content { flex: 1; padding: 2.5rem; overflow-y: auto; }
+
+.header-section {
+  margin-bottom: 2rem;
+  h2 { color: #0F172A; margin: 0; font-size: 2rem; font-weight: 800; }
+  p { color: #64748B; margin-top: 5px; font-size: 1.1rem; }
+}
+
+.card { background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+table {
+  width: 100%; border-collapse: collapse;
+  th { background: #F1F5F9; color: #475569; padding: 1rem; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 0.85rem;}
+  td { padding: 1rem; border-bottom: 1px solid #E2E8F0; vertical-align: middle; }
+  tr:hover { background-color: #F8FAFC; }
+}
+
+.text-muted { color: #64748B; display: block; font-size: 0.85rem; }
+.text-center { text-align: center; padding: 3rem !important; color: #64748B;}
+
+/* Badges de Estados */
+.badge { padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.5px; }
+.badge-warning { background: #FEF3C7; color: #D97706; } /* PROGRAMADA */
+.badge-success { background: #D1FAE5; color: #059669; } /* APROBADA */
+.badge-danger { background: #FEE2E2; color: #DC2626; } /* CANCELADA */
+.badge-info { background: #E0F2FE; color: #0284C7; } /* ATENDIDA */
+
+/* Botones de Acción */
+.action-buttons { display: flex; gap: 0.5rem; }
+.btn-icon {
+  background: transparent; border: 1px solid #E2E8F0; border-radius: 8px;
+  padding: 0.5rem; cursor: pointer; transition: 0.2s; font-size: 1.1rem;
+  &:hover { transform: scale(1.1); }
+}
+.btn-approve:hover { background: #D1FAE5; border-color: #059669; }
+.btn-cancel:hover { background: #FEE2E2; border-color: #DC2626; }
